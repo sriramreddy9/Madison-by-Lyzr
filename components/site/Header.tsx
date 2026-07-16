@@ -14,16 +14,14 @@ import {
 
 function Wordmark() {
   return (
-    <Link href="/" className="group flex items-end gap-2">
-      <span className="font-serif text-2xl font-semibold leading-none text-foreground">
+    <Link href="/" className="group inline-flex flex-col items-start leading-none">
+      <span className="font-serif text-2xl font-semibold text-foreground">
         Madison
       </span>
-      <span className="flex flex-col">
-        <span className="mb-0.5 h-px w-6 bg-brand" aria-hidden />
-        <span className="font-mono text-[11px] leading-none text-muted-foreground">
-          by Lyzr
-        </span>
+      <span className="mt-1 font-mono text-[11px] tracking-wide text-muted-foreground">
+        by Lyzr
       </span>
+      <span className="mt-1.5 h-px w-1/2 bg-brand" aria-hidden />
     </Link>
   );
 }

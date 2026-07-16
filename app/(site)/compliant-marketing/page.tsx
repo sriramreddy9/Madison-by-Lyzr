@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/Badge";
 import { ComparisonTable } from "@/components/ui/ComparisonTable";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
 import { PanelFrame, KVRow, StatusTag } from "@/components/mocks/chrome";
+import { HeroBackdrop } from "@/components/ui/HeroBackdrop";
 import { Reveal } from "@/components/motion/Reveal";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import { ArrowRightIcon, CheckIcon } from "@/components/icons";
@@ -86,8 +87,9 @@ export default function Page() {
       />
 
       {/* Hero — Vault band */}
-      <section className="dark bg-background py-16 text-foreground md:py-24">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 lg:grid-cols-[1fr_1fr]">
+      <section className="dark relative overflow-hidden bg-background py-16 text-foreground md:py-24">
+        <HeroBackdrop src="/images/editorial/collaboration.jpg" priority />
+        <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-6 lg:grid-cols-[1fr_1fr]">
           <div>
             <Eyebrow>{HERO.eyebrow}</Eyebrow>
             <h1 className="mt-5 font-serif text-hero-sm sm:text-hero lg:text-hero-lg">
@@ -137,7 +139,7 @@ export default function Page() {
             </PanelFrame>
           </Reveal>
         </div>
-        <div className="mx-auto mt-14 max-w-6xl px-6">
+        <div className="relative mx-auto mt-14 max-w-6xl px-6">
           <div className="flex flex-wrap gap-2 border-t border-foreground/20 pt-6">
             {TRUST_BAR.map((item) => (
               <Badge key={item}>{item}</Badge>

@@ -20,6 +20,7 @@ import {
   PlugIcon,
   GlobeIcon,
 } from "@/components/icons";
+import { HeroBackdrop } from "@/components/ui/HeroBackdrop";
 import { RiskCockpit } from "@/components/mocks/risk-compliance/RiskCockpit";
 import { ScreenPanel } from "@/components/mocks/risk-compliance/ScreenPanel";
 import {
@@ -92,8 +93,9 @@ export default function Page() {
       />
 
       {/* Hero — Vault band */}
-      <section className="dark bg-background py-16 text-foreground md:py-24">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 lg:grid-cols-[1.02fr_.98fr]">
+      <section className="dark relative overflow-hidden bg-background py-16 text-foreground md:py-24">
+        <HeroBackdrop src="/images/editorial/corridor.jpg" priority />
+        <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-6 lg:grid-cols-[1.02fr_.98fr]">
           <div>
             <Eyebrow>{HERO.eyebrow}</Eyebrow>
             <h1 className="mt-5 font-serif text-hero-sm sm:text-hero lg:text-hero-lg">

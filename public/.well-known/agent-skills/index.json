@@ -1,0 +1,45 @@
+{
+  "name": "Madison by Lyzr — Agent Skills",
+  "description": "Capabilities Madison's governed banking agents provide. Madison is deployed inside a bank's perimeter and provisioned per engagement; these skills describe what Madison does, not a public callable endpoint.",
+  "provider": "Lyzr",
+  "homepage": "https://madison.ai",
+  "documentation": "https://madison.ai/llms-full.txt",
+  "skills": [
+    {
+      "name": "commercial-banking-rm",
+      "title": "Commercial Banking (RM)",
+      "description": "Decision-ready client briefs, meeting capture, credit coordination, and portfolio-growth signals for relationship managers.",
+      "url": "https://madison.ai/commercial-banking-rm"
+    },
+    {
+      "name": "compliant-marketing",
+      "title": "Compliant Marketing",
+      "description": "One-line brief to a compliant, launch-ready, multi-channel campaign on the bank's own data, with fair-lending guardrails and human approval on every regulated step.",
+      "url": "https://madison.ai/compliant-marketing"
+    },
+    {
+      "name": "deal-intelligence",
+      "title": "Deal Intelligence",
+      "description": "Evidence-backed evaluation of companies, partners, and targets with permissioned deal memory; resolves to partner / invest / acquire / monitor / pass.",
+      "url": "https://madison.ai/deal-intelligence"
+    },
+    {
+      "name": "dispute-resolution",
+      "title": "Dispute Resolution (Mortgage Servicing)",
+      "description": "Agentic investigation and drafting of RESPA-window servicing disputes; rulebook decides, model drafts, a person signs.",
+      "url": "https://madison.ai/dispute-resolution"
+    },
+    {
+      "name": "hr",
+      "title": "HR",
+      "description": "The employee journey run end to end: intake and scoring, early phone screen, an HRMS-connected employee desk, and offboarding.",
+      "url": "https://madison.ai/hr"
+    },
+    {
+      "name": "risk-compliance",
+      "title": "Risk & Compliance",
+      "description": "Third-party risk, vendor-AI and model-risk governance, and generated, stress-tested vendor exit playbooks; on-prem and examiner-ready.",
+      "url": "https://madison.ai/risk-compliance"
+    }
+  ]
+}

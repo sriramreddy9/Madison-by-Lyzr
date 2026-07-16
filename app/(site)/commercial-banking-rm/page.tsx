@@ -9,6 +9,7 @@ import { Card } from "@/components/ui/Card";
 import { StatBand } from "@/components/ui/Stat";
 import { StepRail } from "@/components/ui/StepRail";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
+import { HeroBackdrop } from "@/components/ui/HeroBackdrop";
 import { Reveal } from "@/components/motion/Reveal";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import { CheckIcon, MinusIcon } from "@/components/icons";
@@ -70,8 +71,9 @@ export default function Page() {
       />
 
       {/* Hero — Vault band */}
-      <section className="dark bg-background py-16 text-foreground md:py-24">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 lg:grid-cols-2">
+      <section className="dark relative overflow-hidden bg-background py-16 text-foreground md:py-24">
+        <HeroBackdrop src="/images/editorial/briefing.jpg" priority />
+        <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-6 lg:grid-cols-2">
           <div>
             <Eyebrow>{HERO.eyebrow}</Eyebrow>
             <h1 className="mt-5 font-serif text-hero-sm sm:text-hero lg:text-hero-lg">

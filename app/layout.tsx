@@ -30,6 +30,12 @@ export const metadata: Metadata = {
   },
   description:
     "Madison is the Agentic Banking OS: governed AI agents across every banking function, deployed in your perimeter with a full audit trail.",
+  alternates: {
+    canonical: "/",
+    types: {
+      "text/markdown": "/index.md",
+    },
+  },
   openGraph: {
     type: "website",
     siteName: "Madison by Lyzr",
@@ -37,9 +43,18 @@ export const metadata: Metadata = {
     description:
       "Governed AI agents across every banking function. One platform. Your data, your perimeter, your control.",
     url: "/",
+    images: [
+      {
+        url: "/images/architecture/glass-towers.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Madison — the Agentic Banking OS by Lyzr",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
+    images: ["/images/architecture/glass-towers.jpg"],
   },
   robots: {
     index: true,

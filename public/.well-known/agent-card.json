@@ -1,0 +1,70 @@
+{
+  "protocolVersion": "0.2.0",
+  "name": "Madison by Lyzr",
+  "description": "The Agentic Banking OS by Lyzr: governed AI agents across banking functions — commercial banking, compliant marketing, deal intelligence, mortgage-servicing dispute resolution, HR, and risk & compliance. Deployed inside the institution's perimeter, human-in-the-loop on every regulated step, with a full exportable audit trail. Enterprise, quote-based; access is provisioned per engagement, not via a public endpoint.",
+  "provider": {
+    "organization": "Lyzr",
+    "url": "https://www.lyzr.ai"
+  },
+  "version": "1.0.0",
+  "documentationUrl": "https://madison.ai/llms-full.txt",
+  "url": "https://madison.ai",
+  "preferredTransport": "NONE_PUBLIC",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false,
+    "stateTransitionHistory": true
+  },
+  "defaultInputModes": ["text/plain"],
+  "defaultOutputModes": ["text/plain"],
+  "onboarding": {
+    "model": "enterprise-engagement",
+    "howToStart": "Madison is deployed inside a bank's perimeter and provisioned per engagement, beginning with a design-partner pilot. There is no public API, OAuth flow, or MCP endpoint. To start, book a demo.",
+    "contactUrl": "https://madison.ai/contact",
+    "pricingUrl": "https://madison.ai/pricing"
+  },
+  "skills": [
+    {
+      "id": "commercial-banking",
+      "name": "Commercial Banking (RM)",
+      "description": "Prepare relationship managers for client meetings and coordinate credit, service, and portfolio work on the systems the bank already runs.",
+      "tags": ["banking", "relationship-management", "credit"],
+      "examples": ["Prepare a decision-ready brief for a commercial client meeting."]
+    },
+    {
+      "id": "compliant-marketing",
+      "name": "Compliant Marketing",
+      "description": "Turn a one-line brief into a compliant, launch-ready, multi-channel campaign on the bank's own data, with fair-lending guardrails and independent human approval.",
+      "tags": ["marketing", "compliance", "fair-lending"],
+      "examples": ["Launch a compliant high-yield savings campaign to eligible members."]
+    },
+    {
+      "id": "deal-intelligence",
+      "name": "Deal Intelligence",
+      "description": "Evaluate companies, partners, and targets with evidence, context, and permissioned deal memory; resolve to partner / invest / acquire / monitor / pass.",
+      "tags": ["corpdev", "m&a", "evaluation"],
+      "examples": ["Evaluate a payments fintech as a potential partner."]
+    },
+    {
+      "id": "dispute-resolution",
+      "name": "Dispute Resolution (Mortgage Servicing)",
+      "description": "Investigate and draft mortgage-servicing disputes inside the RESPA window; a deterministic rulebook decides, the model drafts, a person signs off.",
+      "tags": ["mortgage-servicing", "respa", "disputes"],
+      "examples": ["Resolve an escrow-shortage dispute with a compliant borrower response."]
+    },
+    {
+      "id": "hr",
+      "name": "HR",
+      "description": "Run the employee journey: candidate intake and scoring, an early phone screen, an employee desk that acts in the HRMS, and offboarding.",
+      "tags": ["hr", "recruiting", "hrms"],
+      "examples": ["Score a requisition's applicants and produce a shortlist a recruiter can trust."]
+    },
+    {
+      "id": "risk-compliance",
+      "name": "Risk & Compliance",
+      "description": "Agentic third-party risk, vendor-AI and model-risk governance, and generated, stress-tested vendor exit playbooks — on-prem and examiner-ready.",
+      "tags": ["tprm", "model-risk", "vendor-ai", "dora"],
+      "examples": ["Govern vendor-embedded AI with an enforceable kill-switch and audit trail."]
+    }
+  ]
+}

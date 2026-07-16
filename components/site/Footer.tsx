@@ -7,25 +7,26 @@ const columns: { heading: string; links: { label: string; href: string }[] }[] =
     {
       heading: "Platform",
       links: [
-        { label: "Platform", href: "/#platform" },
-        { label: "Coverage", href: "/#coverage" },
+        { label: "Platform", href: "/platform" },
         { label: "Solutions", href: "/#solutions" },
         { label: "Governance", href: "/#governance" },
+        { label: "Live demo", href: "/demo" },
       ],
     },
     {
       heading: "Company",
       links: [
-        { label: "About Lyzr", href: "/" },
-        { label: "Careers", href: "/#contact" },
-        { label: "Press", href: "/#contact" },
+        { label: "About", href: "/about" },
+        { label: "Pricing", href: "/pricing" },
+        { label: "Privacy", href: "/privacy" },
+        { label: "For developers", href: "/llms.txt" },
       ],
     },
     {
       heading: "Get in touch",
       links: [
-        { label: "Request a demo", href: "/#contact" },
-        { label: "Talk to our team", href: "/#contact" },
+        { label: "Book a demo", href: "/contact" },
+        { label: "Talk to our team", href: "/contact" },
         { label: "Security overview", href: "/#governance" },
       ],
     },

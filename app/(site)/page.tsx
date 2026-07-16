@@ -24,7 +24,7 @@ import {
   CpuIcon,
   CheckIcon,
 } from "@/components/icons";
-import { JsonLd, SITE_URL, ORGANIZATION } from "@/lib/seo";
+import { JsonLd, SITE_URL, ORGANIZATION, SOFTWARE_APPLICATION } from "@/lib/seo";
 import { TEAMS } from "@/content/nav";
 import {
   HERO,
@@ -108,12 +108,98 @@ export default function HomePage() {
             "@context": "https://schema.org",
             "@graph": [
               ORGANIZATION,
+              SOFTWARE_APPLICATION,
               {
                 "@type": "WebSite",
                 "@id": `${SITE_URL}/#website`,
                 url: SITE_URL,
                 name: "Madison — The Agentic Banking OS by Lyzr",
                 publisher: { "@id": `${SITE_URL}/#organization` },
+              },
+              {
+                "@type": "WebPage",
+                "@id": `${SITE_URL}/#webpage`,
+                url: SITE_URL,
+                name: "Madison — The Agentic Banking OS by Lyzr",
+                isPartOf: { "@id": `${SITE_URL}/#website` },
+                about: { "@id": `${SITE_URL}/#software` },
+                speakable: {
+                  "@type": "SpeakableSpecification",
+                  cssSelector: ["h1", "[data-speakable]"],
+                },
+              },
+              {
+                "@type": "Service",
+                name: "Madison Agentic Banking OS",
+                serviceType: "Governed AI agents for banking",
+                provider: { "@id": `${SITE_URL}/#organization` },
+                areaServed: ["North America", "European Union", "Gulf / GCC", "India"],
+                hasOfferCatalog: {
+                  "@type": "OfferCatalog",
+                  name: "Solutions by team",
+                  itemListElement: [
+                    { name: "Commercial Banking", url: `${SITE_URL}/commercial-banking-rm` },
+                    { name: "Compliant Marketing", url: `${SITE_URL}/compliant-marketing` },
+                    { name: "Deal Intelligence", url: `${SITE_URL}/deal-intelligence` },
+                    { name: "Dispute Resolution", url: `${SITE_URL}/dispute-resolution` },
+                    { name: "HR", url: `${SITE_URL}/hr` },
+                    { name: "Risk & Compliance", url: `${SITE_URL}/risk-compliance` },
+                  ].map((s) => ({
+                    "@type": "Offer",
+                    itemOffered: {
+                      "@type": "Service",
+                      name: s.name,
+                      url: s.url,
+                      provider: { "@id": `${SITE_URL}/#organization` },
+                    },
+                  })),
+                },
+              },
+              {
+                "@type": "FAQPage",
+                "@id": `${SITE_URL}/#faq`,
+                mainEntity: [
+                  {
+                    "@type": "Question",
+                    name: "What is Madison by Lyzr?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "Madison is the Agentic Banking OS: governed AI agents that run work across banking functions — commercial banking, compliant marketing, deal intelligence, dispute resolution, HR, and risk & compliance. It deploys inside your perimeter, keeps a human in the loop on every regulated step, and produces an exportable audit trail.",
+                    },
+                  },
+                  {
+                    "@type": "Question",
+                    name: "Where does Madison run and who owns the data?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "Inside your perimeter — on-premises, in your private cloud (VPC), or fully air-gapped. Your vendor, contract, model, and customer data never leaves your boundary, and there is no training on your data.",
+                    },
+                  },
+                  {
+                    "@type": "Question",
+                    name: "Does Madison replace our core banking systems?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "No. Madison is an orchestration layer that sits on top of the systems you already run (core, CRM, servicing platform, data lake) and coordinates work across them — additive, not a rip-and-replace.",
+                    },
+                  },
+                  {
+                    "@type": "Question",
+                    name: "How is Madison priced?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "Enterprise, quote-based. Engagements start with a bounded design-partner pilot on one workflow and expand from proof. Contact Madison for pricing; there is no public self-serve tier.",
+                    },
+                  },
+                  {
+                    "@type": "Question",
+                    name: "Which AI models power Madison?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "Bring your own LLM — Azure OpenAI, AWS Bedrock, or a self-hosted/private deployment. Your keys, your logs, your controls.",
+                    },
+                  },
+                ],
               },
             ],
           } as never

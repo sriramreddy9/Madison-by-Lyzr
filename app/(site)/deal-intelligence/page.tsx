@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { DataTable } from "@/components/ui/DataTable";
 import { ComparisonTable } from "@/components/ui/ComparisonTable";
+import { HeroBackdrop } from "@/components/ui/HeroBackdrop";
 import { Reveal } from "@/components/motion/Reveal";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import { CheckIcon } from "@/components/icons";
@@ -71,8 +72,9 @@ export default function Page() {
       />
 
       {/* Hero — Vault band */}
-      <section className="dark bg-background py-16 text-foreground md:py-24">
-        <div className="mx-auto max-w-6xl px-6">
+      <section className="dark relative overflow-hidden bg-background py-16 text-foreground md:py-24">
+        <HeroBackdrop src="/images/editorial/boardroom.jpg" priority />
+        <div className="relative mx-auto max-w-6xl px-6">
           <Eyebrow>{HERO.eyebrow}</Eyebrow>
           <h1 className="mt-5 max-w-4xl font-serif text-hero-sm sm:text-hero lg:text-hero-lg">
             {HERO.headline}

@@ -10,6 +10,8 @@ const VERTICALS = [
   "/hr",
 ];
 
+const PAGES = ["/platform", "/pricing", "/about", "/contact", "/privacy"];
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
   return [
@@ -24,6 +26,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
       changeFrequency: "monthly" as const,
       priority: 0.8,
+    })),
+    ...PAGES.map((path) => ({
+      url: `${SITE_URL}${path}`,
+      lastModified,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
     })),
   ];
 }

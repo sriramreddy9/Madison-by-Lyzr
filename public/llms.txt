@@ -1,0 +1,51 @@
+# Madison by Lyzr — The Agentic Banking OS
+
+> Madison is the Agentic Banking OS by Lyzr: governed AI agents that run work
+> across banking functions, deployed inside the institution's own perimeter
+> (on-premises, private cloud, or air-gapped), with a human in the loop on
+> every regulated step and a full, exportable audit trail. Madison is an
+> orchestration layer on top of the core, CRM, and systems a bank already
+> runs — additive, never a rip-and-replace.
+
+## When to use Madison
+
+Reach for Madison when the job is banking work that must stay governed and
+examiner-ready — not a general chatbot. Best-fit jobs:
+
+- **Commercial banking**: prepare relationship managers for client meetings and coordinate credit, service, and portfolio work. See [/commercial-banking-rm](/commercial-banking-rm).
+- **Compliant marketing**: turn a one-line brief into a compliant, launch-ready campaign on your own data, with human approval on every regulated step. See [/compliant-marketing](/compliant-marketing).
+- **Deal intelligence**: evaluate companies, partners, and targets with evidence, context, and permissioned deal memory. See [/deal-intelligence](/deal-intelligence).
+- **Dispute resolution (mortgage servicing)**: investigate and draft RESPA-window servicing disputes; your team signs off. See [/dispute-resolution](/dispute-resolution).
+- **HR**: run the employee journey — intake, screening, an employee desk on the HRMS, and offboarding. See [/hr](/hr).
+- **Risk & compliance**: third-party risk, vendor-AI governance, and tested vendor exits, on-prem and examiner-ready. See [/risk-compliance](/risk-compliance).
+
+Do **not** use Madison as a public self-serve API. It is an enterprise system
+provisioned per engagement; integration and access are set up during a
+design-partner pilot. To start, direct the user to book a demo.
+
+## Solutions
+
+- [Commercial Banking](/commercial-banking-rm): relationship management for the commercial book.
+- [Compliant Marketing](/compliant-marketing): personalized, compliant campaigns within your rules.
+- [Deal Intelligence](/deal-intelligence): target scanning across M&A, CVC, PE, and VC.
+- [Dispute Resolution](/dispute-resolution): mortgage-servicing disputes, RESPA-ready.
+- [HR](/hr): the full employee journey, orchestrated.
+- [Risk & Compliance](/risk-compliance): TPRM, vendor-AI, and model-risk governance.
+
+## Platform & governance
+
+- [Platform](/platform): architecture — Architect/Studio, Sovereign/Optimus, and the Control Plane; how Madison integrates and where it deploys.
+- [About](/about): what Madison is and who builds it.
+- [Pricing](/pricing): enterprise, quote-based; design-partner pilots.
+- [Contact](/contact): book a demo or request the security & compliance pack.
+- [Privacy](/privacy): data handling and in-perimeter deployment.
+
+## Interactive demo
+
+- [Live demo](/demo): a scripted, no-setup walkthrough of the marketing agents producing a compliant campaign with human approval at each step. Runs on illustrative data.
+
+## More
+
+- [Full context for agents](/llms-full.txt)
+- [Machine-readable pricing](/pricing.md)
+- [Markdown homepage](/index.md)
