@@ -17,13 +17,15 @@ adaptations required by the master design system.
 | `/deal-intelligence` | `madison-spotlight/index.html` | editorial (DataTable / ComparisonTable) |
 | `/dispute-resolution` | `madison-mortgage-servicing-landing/index.html` | DecisionInbox, see-it-run panel |
 | `/hr` | `HR-banking.html` | CallCard, AtWorkScreen |
+| `/retail-cross-sell` | `Lyzr_E_Client_Facing_Overview.pdf` (repo root, July 2026) | OpportunityInbox, SenseLoop |
+| `/retail-cross-sell/workflows` | `Lyzr_A_Agent_Catalog_and_Workflows.pdf` (Doc A, July 2026, `~/Desktop/Research/Demo_build/`) | WorkflowRun |
 | `/risk-compliance` | `Madison-Banking-Site/index.html` | RiskCockpit, ScreenPanel ×2, exit screen |
 | `/demo` | `marketing-banking/app/demo` + `app/api/agent` + `components/{demo,brand,landing}` + `lib/{scenario,orchestrator,brain,agents}` | ported near-verbatim (fenced sub-app) |
 
-Retail Banking, Underwriting, KYC, and Reconciliations have **no source
-content**; per the product decision they stay in the "For your team" menu as
-non-clickable **Coming soon** items (labels/descriptions from the master page's
-nav + ICP router). They have no routes and are absent from `sitemap.ts`.
+Underwriting, KYC, and Reconciliations have **no source content**; per the
+product decision they stay in the "For your team" menu as non-clickable
+**Coming soon** items (labels/descriptions from the master page's nav + ICP
+router). They have no routes and are absent from `sitemap.ts`.
 
 ## Adaptations (design-law driven, meaning preserved)
 
@@ -54,6 +56,22 @@ was dropped.
   metadata; `max-w-7xl` normalized to the 1152px container; teal accents →
   brand/neutral. The animated relationship-workflow visual → static
   `ContextFlow`.
+- **`/retail-cross-sell`** — sourced from the client-facing PDF (not
+  `sub-landing/`): "The Lyzr Agentic Workbench" is rendered as "Madison" /
+  "the workbench" per site brand; the PDF's Sense→Judge→Engage→Execute→Learn
+  table and flagship-agent cards are hand-lifted into typed consts (`HOW`,
+  `AGENTS`); stats, pricing meters, and governance claims unchanged. The
+  continuous loop renders as the static `SenseLoop` panel (motion law).
+- **`/retail-cross-sell/workflows`** — sourced from Doc A of the 5-doc series
+  (agent catalog + nine workflow blueprints). Carries blueprints 1–4 (the four
+  that map to the parent page's flagship agents), the L0–L4 autonomy ladder,
+  the three shared assets, and the day-in-the-life narrative; KPIs and
+  "why it wins" lines verbatim. Doc A states **no per-agent pricing** — none
+  invented. Doc A's physical page 6 (Pods 2–3, agents #11–21) is missing from
+  the source PDF; Blueprint-3 agent names are used as cited in the blueprint,
+  not the catalog. "SMB Graduation" (Doc A) = "Business-Banking Graduation"
+  (Doc E / parent page); parent naming kept. One live workflow run renders as
+  the static `WorkflowRun` panel (motion law).
 - **`/dispute-resolution`** — the menu description was updated from the master's
   "Payment exceptions end to end" to mortgage-servicing dispute-resolution
   wording (product decision). `<b>` runs preserved as a typed `RichText` type.
