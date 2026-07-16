@@ -365,19 +365,19 @@ export function BentoGrid() {
         </div>
       </BentoCard>
 
-      {/* Compliant Marketing (medium, next-best-action) */}
+      {/* Compliant Marketing (medium, brief to compliant launch) */}
       <BentoCard
         team="Compliant Marketing"
         title="Compliant Marketing"
-        desc="Personalized next-best-action across every channel — inside your legal and compliance rules."
+        desc="One brief in, a compliant, launch-ready campaign out, built on your own data with a human approving every step."
         seeLabel="See Compliant Marketing"
         className="lg:col-span-4"
         icon={<path d="M4 19l6-11 4 7 3-4 3 8H4z" />}
       >
         <div className="flex flex-wrap gap-2">
-          <Badge tone="neutral">Retain</Badge>
-          <Badge tone="neutral">Cross-sell</Badge>
-          <Badge tone="neutral">Reactivate</Badge>
+          <Badge tone="neutral">Reg DD &amp; Reg Z checked</Badge>
+          <Badge tone="neutral">Human-approved</Badge>
+          <Badge tone="neutral">Audit trail</Badge>
         </div>
       </BentoCard>
 

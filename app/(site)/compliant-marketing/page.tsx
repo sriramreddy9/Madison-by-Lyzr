@@ -7,28 +7,40 @@ import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { ComparisonTable } from "@/components/ui/ComparisonTable";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
+import { StatBand } from "@/components/ui/Stat";
+import { StepRail } from "@/components/ui/StepRail";
+import { LogoWall } from "@/components/ui/LogoWall";
 import { PanelFrame, KVRow, StatusTag } from "@/components/mocks/chrome";
 import { HeroBackdrop } from "@/components/ui/HeroBackdrop";
+import { AdvisorCarousel } from "@/components/mocks/home/AdvisorCarousel";
 import { Reveal } from "@/components/motion/Reveal";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
-import { ArrowRightIcon, CheckIcon } from "@/components/icons";
+import { ArrowRightIcon, CheckIcon, MinusIcon } from "@/components/icons";
+import { PROOF, ADVISORY } from "@/content/home";
 import {
   META,
   HERO,
   HERO_RUN,
+  HERO_METRICS,
   TRUST_BAR,
+  TRUST_PRINCIPLE,
   PROBLEM,
+  POSITIONING,
   WHAT_IT_IS,
   FOUNDATIONS,
   AGENTS,
   AUTONOMY,
   GOVERNANCE,
+  SECURITY,
+  BUSINESS_CASE,
   WEEK_ONE,
+  GTM_ROADMAP,
   USE_CASES,
   WHY_MADISON,
-  STACK,
+  INTEGRATIONS,
   BIGGER_PICTURE,
   SEE_IT_WORK,
+  WHAT_TO_EXPECT,
   FAQ,
   type RunStageState,
 } from "@/content/compliant-marketing";
@@ -139,7 +151,18 @@ export default function Page() {
             </PanelFrame>
           </Reveal>
         </div>
+        {/* Hero metric strip */}
         <div className="relative mx-auto mt-14 max-w-6xl px-6">
+          <dl className="grid grid-cols-2 gap-px border-t border-foreground/30 bg-border/40 lg:grid-cols-4">
+            {HERO_METRICS.map((m) => (
+              <div key={m.value} className="bg-background pt-6 pr-4">
+                <dd className="font-serif text-h3 text-foreground">{m.value}</dd>
+                <dt className="mt-2 text-xs text-muted-foreground">{m.label}</dt>
+              </div>
+            ))}
+          </dl>
+        </div>
+        <div className="relative mx-auto mt-10 max-w-6xl px-6">
           <div className="flex flex-wrap gap-2 border-t border-foreground/20 pt-6">
             {TRUST_BAR.map((item) => (
               <Badge key={item}>{item}</Badge>
@@ -207,6 +230,39 @@ export default function Page() {
               </div>
             </div>
           </div>
+        </div>
+      </Section>
+
+      {/* Positioning triad */}
+      <Section id="positioning">
+        <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:items-center">
+          <Eyebrow>{POSITIONING.eyebrow}</Eyebrow>
+          <Stagger className="grid gap-px border bg-border">
+            {POSITIONING.cards.map((card) => (
+              <StaggerItem
+                key={card.v}
+                className="flex items-center gap-4 bg-background p-5"
+              >
+                <span
+                  className={
+                    card.good
+                      ? "flex size-8 shrink-0 items-center justify-center rounded-full bg-brand-soft text-brand-text"
+                      : "flex size-8 shrink-0 items-center justify-center rounded-full bg-muted text-muted-foreground"
+                  }
+                >
+                  {card.good ? <CheckIcon size={16} /> : <MinusIcon size={16} />}
+                </span>
+                <div>
+                  <div className="font-mono text-overline uppercase tracking-overline text-muted-foreground">
+                    {card.k}
+                  </div>
+                  <div className="mt-0.5 font-sans text-base font-medium text-foreground">
+                    {card.v}
+                  </div>
+                </div>
+              </StaggerItem>
+            ))}
+          </Stagger>
         </div>
       </Section>
 
@@ -421,37 +477,65 @@ export default function Page() {
         </p>
       </Section>
 
-      {/* Governance — Vault band */}
+      {/* Security and governance — Vault band */}
       <Section tone="dark" id="governance">
-        <SectionHeader eyebrow={GOVERNANCE.eyebrow} title={GOVERNANCE.title} dek={GOVERNANCE.lead} />
+        <SectionHeader
+          eyebrow={SECURITY.eyebrow}
+          title={GOVERNANCE.title}
+          dek={SECURITY.reviewerLine}
+        />
+        <p className="mt-6 max-w-160 font-serif text-h3 text-brand-text">
+          {TRUST_PRINCIPLE}
+        </p>
+
+        {/* Block A — the differentiator: compliance checked on every asset */}
+        <div className="mt-12 rounded-md border bg-card p-6 md:p-8">
+          <div className="font-mono text-overline uppercase tracking-overline text-brand-text">
+            {SECURITY.blockA.title}
+          </div>
+          <p className="mt-2 max-w-2xl text-dek text-muted-foreground">
+            {SECURITY.blockA.intro}
+          </p>
+          <ul className="mt-6 grid gap-px border bg-border md:grid-cols-2">
+            {SECURITY.blockA.checks.map((check) => (
+              <li
+                key={check}
+                className="flex items-start gap-3 bg-card p-4 text-sm leading-relaxed text-muted-foreground"
+              >
+                <CheckIcon size={16} className="mt-0.5 shrink-0 text-brand-text" />
+                {check}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-5 text-sm font-medium text-foreground">
+            {SECURITY.blockA.closer}
+          </p>
+        </div>
+
+        {/* Block B — how Madison itself is secured + the decision record */}
         <div className="mt-10 grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:items-start">
           <div>
-            <div className="flex flex-col gap-5">
-              {GOVERNANCE.chipGroups.map((group) => (
-                <div key={group.label}>
-                  <div className="font-mono text-overline uppercase tracking-overline text-muted-foreground">
-                    {group.label}
-                  </div>
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {group.chips.map((chip) => (
-                      <Badge key={chip}>{chip}</Badge>
-                    ))}
-                  </div>
-                </div>
+            <div className="font-mono text-overline uppercase tracking-overline text-muted-foreground">
+              {SECURITY.blockB.title}
+            </div>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {SECURITY.blockB.badges.map((b) => (
+                <Badge key={b.label} tone={b.inProgress ? "warning" : "neutral"}>
+                  {b.label}
+                </Badge>
               ))}
             </div>
-            <div className="mt-8 grid gap-px border bg-border sm:grid-cols-2">
-              {GOVERNANCE.cards.map((card) => (
-                <div key={card.title} className="bg-background p-5">
-                  <h3 className="font-sans text-base font-semibold text-foreground">
-                    {card.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    {card.body}
-                  </p>
-                </div>
+            <ul className="mt-6 flex flex-col gap-px border-t">
+              {SECURITY.blockB.items.map((item) => (
+                <li
+                  key={item}
+                  className="flex items-start gap-3 border-b py-3.5 text-sm text-muted-foreground"
+                >
+                  <CheckIcon size={16} className="mt-0.5 shrink-0 text-brand-text" />
+                  {item}
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
           <PanelFrame
             title={GOVERNANCE.audit.panelTitle}
@@ -535,6 +619,18 @@ export default function Page() {
         </div>
       </Section>
 
+      {/* Go-to-market roadmap (weeks-based) */}
+      <Section id="roadmap">
+        <div className="max-w-160">
+          <Eyebrow>{GTM_ROADMAP.eyebrow}</Eyebrow>
+          <h2 className="mt-4 font-serif text-section lg:text-section-lg">
+            {GTM_ROADMAP.title}
+          </h2>
+          <p className="mt-5 text-dek text-muted-foreground">{GTM_ROADMAP.dek}</p>
+        </div>
+        <StepRail className="mt-12" steps={GTM_ROADMAP.steps} />
+      </Section>
+
       {/* Use cases */}
       <Section tone="sunken" bordered>
         <SectionHeader eyebrow={USE_CASES.eyebrow} title={USE_CASES.title} />
@@ -571,21 +667,47 @@ export default function Page() {
         </p>
       </Section>
 
-      {/* Works with your stack */}
-      <Section tone="sunken" bordered>
-        <SectionHeader eyebrow={STACK.eyebrow} title={STACK.title} dek={STACK.dek} />
+      {/* The business case */}
+      <Section tone="sunken" bordered id="business-case">
+        <div className="max-w-160">
+          <Eyebrow>{BUSINESS_CASE.eyebrow}</Eyebrow>
+          <h2 className="mt-4 font-serif text-section lg:text-section-lg">
+            {BUSINESS_CASE.title}
+          </h2>
+          <p className="mt-5 text-dek text-muted-foreground">
+            {BUSINESS_CASE.intro}
+          </p>
+        </div>
+        <Reveal>
+          <StatBand items={BUSINESS_CASE.tiles} className="mt-12" />
+        </Reveal>
+        <p className="mt-6 font-mono text-xs text-muted-foreground">
+          {BUSINESS_CASE.footnote}
+        </p>
+      </Section>
+
+      {/* Works with your stack — named integrations */}
+      <Section id="integrations">
+        <SectionHeader
+          eyebrow={INTEGRATIONS.eyebrow}
+          title={INTEGRATIONS.title}
+          dek={INTEGRATIONS.dek}
+        />
         <div className="mt-10 grid gap-px border bg-border sm:grid-cols-2">
-          {STACK.groups.map((group) => (
+          {INTEGRATIONS.groups.map((group) => (
             <div key={group.name} className="bg-background p-6">
-              <h3 className="font-sans text-base font-semibold text-foreground">
+              <h3 className="font-mono text-overline uppercase tracking-overline text-brand-text">
                 {group.name}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                {group.desc}
+              <p className="mt-2 text-sm leading-relaxed text-foreground">
+                {group.systems}
               </p>
             </div>
           ))}
         </div>
+        <p className="mt-6 max-w-3xl text-sm text-muted-foreground">
+          {INTEGRATIONS.note}
+        </p>
       </Section>
 
       {/* The bigger picture */}
@@ -628,25 +750,68 @@ export default function Page() {
         </div>
       </Section>
 
-      {/* See it work — Vault closing band */}
+      {/* Social proof — in pilot and production wordmarks */}
+      <Section tone="sunken" tight bordered>
+        <Eyebrow className="text-center">{PROOF.eyebrow}</Eyebrow>
+        <LogoWall names={PROOF.names} caption={PROOF.caption} />
+      </Section>
+
+      {/* Advisory board */}
+      <Section id="advisory">
+        <SectionHeader
+          align="center"
+          eyebrow={ADVISORY.eyebrow}
+          title={ADVISORY.title}
+          dek={ADVISORY.dek}
+          className="mx-auto"
+        />
+        <div className="mt-12">
+          <AdvisorCarousel advisors={ADVISORY.advisors} />
+        </div>
+      </Section>
+
+      {/* See it work — Vault closing band with what to expect */}
       <Section tone="dark" id="contact">
-        <div className="mx-auto max-w-160 text-center">
-          <Eyebrow>{SEE_IT_WORK.eyebrow}</Eyebrow>
-          <h2 className="mt-4 font-serif text-section lg:text-section-lg">
-            {SEE_IT_WORK.title}
-          </h2>
-          <p className="mt-4 text-dek text-muted-foreground">{SEE_IT_WORK.line}</p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            {SEE_IT_WORK.actions.map((action) => (
-              <Button
-                key={action.label}
-                href={action.href}
-                variant={"variant" in action ? action.variant : "primary"}
-                size="lg"
-              >
-                {action.label}
-              </Button>
-            ))}
+        <div className="grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+          <div>
+            <Eyebrow>{SEE_IT_WORK.eyebrow}</Eyebrow>
+            <h2 className="mt-4 font-serif text-section lg:text-section-lg">
+              {SEE_IT_WORK.title}
+            </h2>
+            <p className="mt-4 max-w-md text-dek text-muted-foreground">
+              {SEE_IT_WORK.line}
+            </p>
+            <p className="mt-4 max-w-md text-sm text-foreground">
+              {WHAT_TO_EXPECT.cohort}
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              {SEE_IT_WORK.actions.map((action) => (
+                <Button
+                  key={action.label}
+                  href={action.href}
+                  variant={"variant" in action ? action.variant : "primary"}
+                  size="lg"
+                >
+                  {action.label}
+                </Button>
+              ))}
+            </div>
+          </div>
+          <div className="rounded-md border bg-card/60 p-6">
+            <div className="font-mono text-overline uppercase tracking-overline text-brand-text">
+              {WHAT_TO_EXPECT.label}
+            </div>
+            <ul className="mt-5 flex flex-col gap-px border-t">
+              {WHAT_TO_EXPECT.items.map((item) => (
+                <li
+                  key={item}
+                  className="flex items-start gap-3 border-b py-3.5 text-sm text-muted-foreground"
+                >
+                  <CheckIcon size={16} className="mt-0.5 shrink-0 text-brand-text" />
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </Section>

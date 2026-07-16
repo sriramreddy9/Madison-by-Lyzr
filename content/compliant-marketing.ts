@@ -25,7 +25,7 @@ export const META = {
 
 export const HERO = {
   eyebrow: "Madison for Marketing · The Agentic Banking OS",
-  headline: "The marketing team your bank could never afford to hire.",
+  headline: "The marketing team you could never afford to hire.",
   subhead:
     "Madison for Marketing turns a one-line brief into a compliant, launch-ready campaign, built on your own data, with a human approving every step. Campaigns that took weeks now take days.",
   primaryCta: { label: "Request a demo", href: "/#contact" },
@@ -76,9 +76,9 @@ export const HERO_RUN = {
 
 export const TRUST_BAR = [
   "Runs inside your perimeter",
+  "Reg DD and Reg Z checked on every asset",
   "A human approves every regulated step",
   "Exportable audit trail",
-  "Aligned to SR 11-7 and GLBA",
 ];
 
 export const PROBLEM = {
@@ -93,7 +93,7 @@ export const PROBLEM = {
     lobs: ["Deposits", "Lending", "Cards", "Wealth", "Commercial"],
     marketing: { name: "Marketing", sub: "every asset, every channel" },
     gate: { name: "Compliance and Legal", duration: "4 to 5 weeks" },
-    launch: { name: "Launch", sub: "one through" },
+    launch: { name: "Launch", sub: "one campaign finally clears" },
   },
 };
 
@@ -513,14 +513,34 @@ export const SEE_IT_WORK = {
   line: "Type a brief, watch the agents produce a compliant, launch-ready campaign, and approve each step yourself. No setup, no integration, running on illustrative data for a demonstration market.",
   actions: [
     { label: "Request a demo", href: "/#contact" },
-    { label: "Launch the live demo", href: "/demo", variant: "outline" as const },
+    { label: "See a live run", href: "/demo", variant: "outline" as const },
   ],
 };
 
 export const FAQ = {
   eyebrow: "FAQ",
-  title: "Questions your team and your examiner will ask.",
+  title: "The questions your compliance team will ask.",
   items: [
+    {
+      question: "Which model powers it?",
+      answer:
+        "Yours. BYO-LLM against your Azure OpenAI, AWS Bedrock, or a private deployment. Your keys, your logs, your controls.",
+    },
+    {
+      question: "How is our data isolated?",
+      answer:
+        "Single-tenant deployment in your region. No cross-tenant training, ever. Your data is never used to train shared models.",
+    },
+    {
+      question: "Can it send anything on its own?",
+      answer:
+        "No. The rules decide, the model drafts and explains, and a marketer then a compliance officer approve independently. You set the autonomy level per function.",
+    },
+    {
+      question: "Do we replace our stack?",
+      answer:
+        "No. Madison is the layer on top of the core, CRM, and send tools you already run.",
+    },
     {
       question: "Does our data leave our environment?",
       answer:
@@ -556,5 +576,172 @@ export const FAQ = {
       answer:
         "Your CRM and systems of record, your send tools such as Salesforce Marketing Cloud, Braze, and Banno, and specialist copy-scoring tools where you already use them.",
     },
+  ],
+};
+
+/* ---- Credibility layer (added: hero metrics, positioning, business case,
+   security depth, named integrations, weeks-based roadmap, what to expect).
+   Writing rules: no em dashes, ranges use "to", inclusive "customers and
+   members", no "pilot" (use "design-partner engagement"). ---- */
+
+export const HERO_METRICS = [
+  { value: "Weeks to days", label: "Campaign clearance" },
+  { value: "1 brief", label: "In. A full compliant campaign out." },
+  { value: "Week 1", label: "First value, zero integration" },
+  { value: "Every send", label: "Human-approved before launch" },
+];
+
+export const TRUST_PRINCIPLE =
+  "The rules decide. The model drafts and explains. A human approves.";
+
+export const POSITIONING = {
+  eyebrow: "Where Madison fits",
+  cards: [
+    { k: "Not", v: "Another AI content writer", good: false },
+    { k: "Not", v: "A marketing cloud you rip and replace", good: false },
+    {
+      k: "Is",
+      v: "The orchestration layer from brief to compliant launch, on your own data",
+      good: true,
+    },
+  ],
+};
+
+export const BUSINESS_CASE = {
+  eyebrow: "The business case",
+  title: "Measured. Attributed. Defensible.",
+  intro:
+    "Agree the baseline before deployment. Measure the change in production. Expand when the numbers make the case.",
+  tiles: [
+    { value: "Weeks to days", label: "Time from brief to cleared launch" },
+    {
+      value: "Output of a larger team",
+      label: "A team of two to ten ships like a big one",
+    },
+    {
+      value: "Every regulated send gated",
+      label: "Marketer, then compliance, independently",
+    },
+    { value: "Week one", label: "First value, with zero integration" },
+  ],
+  footnote:
+    "Illustrative until baselined with your team. We measure against agreed outcomes in production.",
+};
+
+export const SECURITY = {
+  eyebrow: "Security and governance",
+  reviewerLine:
+    "Built to pass second-line review. Your compliance team reads landing pages too, so we wrote this part for them.",
+  blockA: {
+    title: "Compliance checked on every asset",
+    intro:
+      "Each item is checked by the Compliance Pre-check agent before a human sees the draft.",
+    checks: [
+      "Truth in Savings: APY, minimum-balance, fee, and variable-rate disclosures (Reg DD for banks, Part 707 for credit unions).",
+      "Truth in Lending: trigger-term detection for rate, payment, and term, with the required APR and repayment disclosures at equal prominence and close proximity (Reg Z, open-end and closed-end).",
+      "UDAAP screening for unfair, deceptive, or abusive language.",
+      "The FDIC Member statement and official digital sign for banks, the NCUA insured statement for credit unions, and non-deposit product disclosures where they apply.",
+      "Fair-lending-aware segmentation with disparate-impact guardrails, and targeting that respects platform Special Ad Category limits for credit and housing ads (ECOA, Reg B, Fair Housing).",
+      "CAN-SPAM for email and consent handling for SMS and calls (TCPA), per channel.",
+      "WCAG accessibility checks on digital assets.",
+    ],
+    closer:
+      "Every check is logged with the rule cited, so the trail an examiner asks for already exists.",
+  },
+  blockB: {
+    title: "How Madison itself is secured",
+    badges: [
+      { label: "SOC 2 Type II" },
+      { label: "ISO 27001" },
+      { label: "GLBA" },
+      { label: "Model-risk aligned (SR 11-7)" },
+      { label: "PCI DSS (in scope, in progress)", inProgress: true },
+    ],
+    items: [
+      "BYO-LLM: bring your Azure OpenAI, AWS Bedrock, or private deployment. Your keys, your logs, your controls.",
+      "Zero training on your data. Ever.",
+      "Single-tenant deployment in your region. No cross-tenant training.",
+      "Role-based access control, SSO and identity (SAML, OIDC, SCIM), encryption in transit and at rest.",
+      "Deploy in the cloud, in your VPC, on-premises, or fully air-gapped.",
+    ],
+  },
+};
+
+export const INTEGRATIONS = {
+  eyebrow: "Works with your stack",
+  title: "We integrate the tools you already trust.",
+  dek: "Madison is the layer on top of the systems your team and your examiners already know. It owns the workflow around them: strategy, brief, on-data segmentation, orchestration, and memory.",
+  groups: [
+    {
+      name: "Core banking",
+      systems:
+        "Fiserv, Jack Henry (SilverLake, CIF 20/20, Symitar Episys for credit unions), FIS, Finastra",
+    },
+    { name: "Digital banking", systems: "Banno, Q2, Alkami" },
+    {
+      name: "CRM and marketing",
+      systems:
+        "Salesforce Financial Services Cloud and Marketing Cloud, HubSpot, Total Expert, Braze, Adobe and Marketo",
+    },
+    { name: "Data and warehouse", systems: "Snowflake, Databricks" },
+    {
+      name: "Rate and competitive intelligence",
+      systems:
+        "Curinos, Competiscan, Mintel Comperemedia, plus Madison's own zero-integration public-data brief on day zero",
+    },
+    {
+      name: "Copy scoring",
+      systems: "Persado, inside the Madison flow where you already use it",
+    },
+    {
+      name: "Your models",
+      systems:
+        "BYO-LLM against Azure OpenAI, AWS Bedrock, or a private deployment",
+    },
+    { name: "Distribution", systems: "the Fiserv and Jack Henry marketplaces" },
+  ],
+  note: "Madison sits on top of the estate you already run, never replacing it. Connectors are provisioned per engagement; availability depends on your existing subscriptions, data licenses, and approved connector setup.",
+};
+
+export const GTM_ROADMAP = {
+  eyebrow: "Go to market",
+  title: "Land in week one. Expand from proof.",
+  dek: "Start with public intelligence and no integration, connect your stack, prove the numbers against a baseline, then expand.",
+  steps: [
+    {
+      num: "01",
+      meta: "Weeks 1 to 2 · Land",
+      title: "Land",
+      body: "Public competitor and rate intelligence. No integration, value in week one.",
+    },
+    {
+      num: "02",
+      meta: "Weeks 3 to 4 · Connect",
+      title: "Connect",
+      body: "Connect your CRM and send tools. First governed campaign, brief to compliant launch.",
+    },
+    {
+      num: "03",
+      meta: "Weeks 5 to 8 · Prove",
+      title: "Prove",
+      body: "Measure clearance time and output against the baseline. A visible trail that de-risks the exam.",
+    },
+    {
+      num: "04",
+      meta: "Week 8 onward · Expand",
+      title: "Expand",
+      body: "More channels, and dynamic agents that compound per institution.",
+    },
+  ],
+};
+
+export const WHAT_TO_EXPECT = {
+  label: "What to expect",
+  cohort: "We work with a small number of institutions per cohort.",
+  items: [
+    "A 30-minute working session with a marketer on your team",
+    "A live run on one of your real, masked campaigns",
+    "A reference architecture for your CISO",
+    "A scoping document within 48 hours",
   ],
 };

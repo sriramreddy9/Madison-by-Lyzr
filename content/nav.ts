@@ -40,8 +40,8 @@ export const TEAMS: TeamNavItem[] = [
   },
   {
     label: "Compliant Marketing",
-    role: "Personalized, compliant engagement",
-    routerLine: "Personalized next-best-action within your rules.",
+    role: "Brief to compliant launch",
+    routerLine: "One brief in, a compliant, launch-ready campaign out.",
     href: "/compliant-marketing",
   },
   {
