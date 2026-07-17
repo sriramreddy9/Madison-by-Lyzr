@@ -43,7 +43,6 @@ import {
   USE_CASES,
   WHY_MADISON,
   INTEGRATIONS,
-  BIGGER_PICTURE,
   SEE_IT_WORK,
   WHAT_TO_EXPECT,
   WHO_IT_FITS,
@@ -693,38 +692,6 @@ export default function Page() {
         <p className="mt-6 max-w-3xl text-sm text-muted-foreground">
           {INTEGRATIONS.note}
         </p>
-      </Section>
-
-      {/* The bigger picture */}
-      <Section id="bigger-picture">
-        <div className="grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
-          <div>
-            <Eyebrow>{BIGGER_PICTURE.eyebrow}</Eyebrow>
-            <h2 className="mt-4 font-serif text-section lg:text-section-lg">
-              {BIGGER_PICTURE.title}
-            </h2>
-            <p className="mt-5 text-dek text-muted-foreground">
-              {BIGGER_PICTURE.body}
-            </p>
-          </div>
-          <PanelFrame title={BIGGER_PICTURE.panelTitle}>
-            <div className="grid grid-cols-2 gap-px bg-border">
-              {BIGGER_PICTURE.nodes.map((node) => (
-                <div
-                  key={node.label}
-                  className="flex items-center justify-between gap-2 bg-background px-4 py-4"
-                >
-                  <span className="text-sm font-medium text-foreground">
-                    {node.label}
-                  </span>
-                  <Badge tone={node.tag === "live" ? "brand" : "neutral"}>
-                    {node.tag}
-                  </Badge>
-                </div>
-              ))}
-            </div>
-          </PanelFrame>
-        </div>
       </Section>
 
       {/* FAQ */}
