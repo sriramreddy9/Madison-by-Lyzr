@@ -3,6 +3,8 @@ import { SITE_URL } from "@/lib/seo";
 
 const VERTICALS = [
   "/commercial-banking-rm",
+  "/retail-cross-sell",
+  "/retail-cross-sell/workflows",
   "/compliant-marketing",
   "/risk-compliance",
   "/deal-intelligence",

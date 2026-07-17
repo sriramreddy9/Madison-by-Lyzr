@@ -30,7 +30,6 @@ export const TEAMS: TeamNavItem[] = [
     role: "Cross-sell to existing clients",
     routerLine: "Cross-sell to existing consumers and members.",
     href: "/retail-cross-sell",
-    comingSoon: true,
   },
   {
     label: "Deal Intelligence",
