@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Fragment } from "react";
 import { JsonLd, verticalBreadcrumbs } from "@/lib/seo";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -15,7 +16,16 @@ import { HeroBackdrop } from "@/components/ui/HeroBackdrop";
 import { AdvisorCarousel } from "@/components/mocks/home/AdvisorCarousel";
 import { Reveal } from "@/components/motion/Reveal";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
-import { ArrowRightIcon, CheckIcon, MinusIcon } from "@/components/icons";
+import {
+  ArrowRightIcon,
+  CheckIcon,
+  MinusIcon,
+  LockIcon,
+  ShieldIcon,
+  BuildingIcon,
+  UserCheckIcon,
+  LayersIcon,
+} from "@/components/icons";
 import { PROOF, ADVISORY } from "@/content/home";
 import {
   META,
@@ -23,7 +33,7 @@ import {
   HERO_RUN,
   HERO_METRICS,
   TRUST_BAR,
-  TRUST_PRINCIPLE,
+  TRUST_CHIPS,
   PROBLEM,
   POSITIONING,
   WHAT_IT_IS,
@@ -67,6 +77,14 @@ const STAGE_TAG: Record<RunStageState, string> = {
   waiting: "Awaiting you",
   queued: "Queued",
 };
+
+const SEC_TILE_ICONS = {
+  lock: LockIcon,
+  shield: ShieldIcon,
+  building: BuildingIcon,
+  userCheck: UserCheckIcon,
+  layers: LayersIcon,
+} as const;
 
 export default function Page() {
   return (
@@ -477,99 +495,134 @@ export default function Page() {
         </p>
       </Section>
 
-      {/* Security and governance — Vault band */}
+      {/* Security and governance — Vault band (visual, slimmed) */}
       <Section tone="dark" id="governance">
         <SectionHeader
           eyebrow={SECURITY.eyebrow}
           title={GOVERNANCE.title}
-          dek={SECURITY.reviewerLine}
+          dek={SECURITY.intro}
         />
-        <p className="mt-6 max-w-160 font-serif text-h3 text-brand-text">
-          {TRUST_PRINCIPLE}
-        </p>
 
-        {/* Block A — the differentiator: compliance checked on every asset */}
-        <div className="mt-12 rounded-md border bg-card p-6 md:p-8">
-          <div className="font-mono text-overline uppercase tracking-overline text-brand-text">
-            {SECURITY.blockA.title}
-          </div>
-          <p className="mt-2 max-w-2xl text-dek text-muted-foreground">
-            {SECURITY.blockA.intro}
-          </p>
-          <ul className="mt-6 grid gap-px border bg-border md:grid-cols-2">
-            {SECURITY.blockA.checks.map((check) => (
-              <li
-                key={check}
-                className="flex items-start gap-3 bg-card p-4 text-sm leading-relaxed text-muted-foreground"
-              >
-                <CheckIcon size={16} className="mt-0.5 shrink-0 text-brand-text" />
-                {check}
-              </li>
-            ))}
-          </ul>
-          <p className="mt-5 text-sm font-medium text-foreground">
-            {SECURITY.blockA.closer}
-          </p>
+        {/* Trust principle as three chips with arrows between */}
+        <div className="mt-8 flex flex-wrap items-center gap-2.5">
+          {TRUST_CHIPS.map((chip, i) => (
+            <Fragment key={chip}>
+              {i > 0 ? (
+                <ArrowRightIcon
+                  size={16}
+                  className="shrink-0 text-muted-foreground/60"
+                />
+              ) : null}
+              <span className="rounded-full border border-brand/30 bg-brand-soft px-4 py-1.5 font-mono text-xs uppercase tracking-wide text-brand-text">
+                {chip}
+              </span>
+            </Fragment>
+          ))}
         </div>
 
-        {/* Block B — how Madison itself is secured + the decision record */}
-        <div className="mt-10 grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:items-start">
+        <div className="mt-12 grid gap-12 lg:grid-cols-2 lg:items-start">
+          {/* Block A — compliance checklist over a reused campaign-asset mockup */}
+          <div>
+            <div className="font-mono text-overline uppercase tracking-overline text-brand-text">
+              {SECURITY.blockA.title}
+            </div>
+            <div className="mt-5 overflow-hidden rounded-md border bg-card shadow-lg">
+              <div className="border-b bg-muted px-4 py-3">
+                <div className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
+                  {SECURITY.blockA.asset.kicker}
+                </div>
+                <div className="mt-1 font-serif text-h3 text-foreground">
+                  {SECURITY.blockA.asset.headline}
+                </div>
+              </div>
+              <Stagger className="grid gap-px bg-border sm:grid-cols-2">
+                {SECURITY.blockA.checks.map((check) => (
+                  <StaggerItem key={check.label} className="bg-card">
+                    <div
+                      title={check.cite}
+                      className="flex h-full cursor-help items-center gap-2.5 px-4 py-3"
+                    >
+                      <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-brand text-background">
+                        <CheckIcon size={12} strokeWidth={2.4} />
+                      </span>
+                      <span className="text-sm font-medium text-foreground">
+                        {check.label}
+                      </span>
+                    </div>
+                  </StaggerItem>
+                ))}
+              </Stagger>
+            </div>
+            <p className="mt-4 text-sm text-muted-foreground">
+              {SECURITY.blockA.caption}
+            </p>
+          </div>
+
+          {/* Block B — Madison's own security: badges + icon tiles + audit log */}
           <div>
             <div className="font-mono text-overline uppercase tracking-overline text-muted-foreground">
               {SECURITY.blockB.title}
             </div>
-            <div className="mt-4 flex flex-wrap gap-2">
+            <div className="mt-5 flex flex-wrap gap-2">
               {SECURITY.blockB.badges.map((b) => (
                 <Badge key={b.label} tone={b.inProgress ? "warning" : "neutral"}>
                   {b.label}
                 </Badge>
               ))}
             </div>
-            <ul className="mt-6 flex flex-col gap-px border-t">
-              {SECURITY.blockB.items.map((item) => (
-                <li
-                  key={item}
-                  className="flex items-start gap-3 border-b py-3.5 text-sm text-muted-foreground"
-                >
-                  <CheckIcon size={16} className="mt-0.5 shrink-0 text-brand-text" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <PanelFrame
-            title={GOVERNANCE.audit.panelTitle}
-            status={
-              <span className="font-mono text-[11px] uppercase tracking-wide text-brand-text">
-                {GOVERNANCE.audit.exportLabel}
-              </span>
-            }
-          >
-            <div className="border-b px-4 py-2 font-mono text-[11px] text-muted-foreground">
-              {GOVERNANCE.audit.sub}
+            <div className="mt-4 flex flex-wrap gap-2">
+              {SECURITY.blockB.tiles.map((tile) => {
+                const Icon = SEC_TILE_ICONS[tile.icon];
+                return (
+                  <span
+                    key={tile.label}
+                    className="inline-flex items-center gap-2 rounded-md border bg-card px-3 py-2 text-sm font-medium text-foreground"
+                  >
+                    <Icon
+                      size={16}
+                      strokeWidth={1.6}
+                      className="shrink-0 text-brand-text"
+                    />
+                    {tile.label}
+                  </span>
+                );
+              })}
             </div>
-            <ul>
-              {GOVERNANCE.audit.rows.map((row, i) => (
-                <li
-                  key={i}
-                  className="grid grid-cols-[3rem_1fr] gap-3 border-b border-border/70 px-4 py-2.5 last:border-b-0"
-                >
-                  <span className="font-mono text-[11px] text-muted-foreground">
-                    {row.t}
-                  </span>
-                  <span className="text-[13px] leading-relaxed">
-                    <span className="font-medium text-foreground">
-                      {row.actor}
+            <PanelFrame
+              title={GOVERNANCE.audit.panelTitle}
+              status={
+                <span className="font-mono text-[11px] uppercase tracking-wide text-brand-text">
+                  {GOVERNANCE.audit.exportLabel}
+                </span>
+              }
+              className="mt-6"
+            >
+              <ul>
+                {GOVERNANCE.audit.rows.map((row, i) => (
+                  <li
+                    key={i}
+                    className="grid grid-cols-[3rem_1fr] gap-3 border-b border-border/70 px-4 py-2 last:border-b-0"
+                  >
+                    <span className="font-mono text-[11px] text-muted-foreground">
+                      {row.t}
                     </span>
-                    <span className="text-muted-foreground"> — {row.action}</span>
-                  </span>
-                </li>
-              ))}
-            </ul>
-            <p className="border-t px-4 py-3 text-[11px] text-muted-foreground">
-              {GOVERNANCE.audit.foot}
-            </p>
-          </PanelFrame>
+                    <span className="text-[13px] leading-relaxed">
+                      <span className="font-medium text-foreground">
+                        {row.actor}
+                      </span>
+                      <span className="text-muted-foreground">
+                        {" "}
+                        — {row.action}
+                      </span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <p className="border-t px-4 py-2.5 text-[11px] text-muted-foreground">
+                {SECURITY.blockB.auditCaption}
+              </p>
+            </PanelFrame>
+          </div>
         </div>
       </Section>
 

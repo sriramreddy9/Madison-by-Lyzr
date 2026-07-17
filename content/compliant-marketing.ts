@@ -591,8 +591,12 @@ export const HERO_METRICS = [
   { value: "Every send", label: "Human-approved before launch" },
 ];
 
-export const TRUST_PRINCIPLE =
-  "The rules decide. The model drafts and explains. A human approves.";
+/** Rendered as three chips with arrows between them (was one sentence). */
+export const TRUST_CHIPS = [
+  "The rules decide",
+  "The model drafts and explains",
+  "A human approves",
+];
 
 export const POSITIONING = {
   eyebrow: "Where Madison fits",
@@ -628,25 +632,34 @@ export const BUSINESS_CASE = {
     "Illustrative until baselined with your team. We measure against agreed outcomes in production.",
 };
 
+export type SecTileIcon = "lock" | "shield" | "building" | "userCheck" | "layers";
+
 export const SECURITY = {
   eyebrow: "Security and governance",
-  reviewerLine:
+  intro:
     "Built to pass second-line review. Your compliance team reads landing pages too, so we wrote this part for them.",
   blockA: {
     title: "Compliance checked on every asset",
-    intro:
-      "Each item is checked by the Compliance Pre-check agent before a human sees the draft.",
+    // Reused campaign-asset mockup (the landing hero already shown on the page)
+    // that the checklist sits over.
+    asset: {
+      kicker: "Landing hero · pre-flight",
+      headline: "4.25% APY high-yield savings. Put idle money to work.",
+    },
+    // Label-only; the regulatory citation lives in a hover tooltip, not body text.
     checks: [
-      "Truth in Savings: APY, minimum-balance, fee, and variable-rate disclosures (Reg DD for banks, Part 707 for credit unions).",
-      "Truth in Lending: trigger-term detection for rate, payment, and term, with the required APR and repayment disclosures at equal prominence and close proximity (Reg Z, open-end and closed-end).",
-      "UDAAP screening for unfair, deceptive, or abusive language.",
-      "The FDIC Member statement and official digital sign for banks, the NCUA insured statement for credit unions, and non-deposit product disclosures where they apply.",
-      "Fair-lending-aware segmentation with disparate-impact guardrails, and targeting that respects platform Special Ad Category limits for credit and housing ads (ECOA, Reg B, Fair Housing).",
-      "CAN-SPAM for email and consent handling for SMS and calls (TCPA), per channel.",
-      "WCAG accessibility checks on digital assets.",
+      { label: "Truth in Savings", cite: "Reg DD (banks), Part 707 (credit unions)" },
+      { label: "Truth in Lending", cite: "Reg Z, open-end and closed-end" },
+      { label: "UDAAP", cite: "Unfair, deceptive, or abusive acts or practices" },
+      {
+        label: "FDIC and NCUA",
+        cite: "FDIC official sign (Part 328), NCUA insured statement",
+      },
+      { label: "Fair lending", cite: "ECOA, Reg B, Fair Housing" },
+      { label: "CAN-SPAM and TCPA", cite: "Email (CAN-SPAM), SMS and calls (TCPA)" },
+      { label: "WCAG", cite: "WCAG accessibility on digital assets" },
     ],
-    closer:
-      "Every check is logged with the rule cited, so the trail an examiner asks for already exists.",
+    caption: "Logged with the rule cited. The exam trail writes itself.",
   },
   blockB: {
     title: "How Madison itself is secured",
@@ -654,16 +667,17 @@ export const SECURITY = {
       { label: "SOC 2 Type II" },
       { label: "ISO 27001" },
       { label: "GLBA" },
-      { label: "Model-risk aligned (SR 11-7)" },
-      { label: "PCI DSS (in scope, in progress)", inProgress: true },
+      { label: "SR 11-7" },
+      { label: "PCI DSS (in progress)", inProgress: true },
     ],
-    items: [
-      "BYO-LLM: bring your Azure OpenAI, AWS Bedrock, or private deployment. Your keys, your logs, your controls.",
-      "Zero training on your data. Ever.",
-      "Single-tenant deployment in your region. No cross-tenant training.",
-      "Role-based access control, SSO and identity (SAML, OIDC, SCIM), encryption in transit and at rest.",
-      "Deploy in the cloud, in your VPC, on-premises, or fully air-gapped.",
+    tiles: [
+      { icon: "lock" as SecTileIcon, label: "Your keys, BYO-LLM" },
+      { icon: "shield" as SecTileIcon, label: "Zero training on your data" },
+      { icon: "building" as SecTileIcon, label: "Single-tenant, your region" },
+      { icon: "userCheck" as SecTileIcon, label: "RBAC and SSO" },
+      { icon: "layers" as SecTileIcon, label: "Cloud, VPC, on-prem, air-gapped" },
     ],
+    auditCaption: "Every send, edit, and approval logged and exportable.",
   },
 };
 
