@@ -8,12 +8,9 @@ import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { ComparisonTable } from "@/components/ui/ComparisonTable";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
-import { StatBand } from "@/components/ui/Stat";
 import { StepRail } from "@/components/ui/StepRail";
-import { LogoWall } from "@/components/ui/LogoWall";
 import { PanelFrame, KVRow, StatusTag } from "@/components/mocks/chrome";
 import { HeroBackdrop } from "@/components/ui/HeroBackdrop";
-import { AdvisorCarousel } from "@/components/mocks/home/AdvisorCarousel";
 import { Reveal } from "@/components/motion/Reveal";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import {
@@ -26,7 +23,6 @@ import {
   UserCheckIcon,
   LayersIcon,
 } from "@/components/icons";
-import { PROOF, ADVISORY } from "@/content/home";
 import {
   META,
   HERO,
@@ -42,7 +38,6 @@ import {
   AUTONOMY,
   GOVERNANCE,
   SECURITY,
-  BUSINESS_CASE,
   WEEK_ONE,
   GTM_ROADMAP,
   USE_CASES,
@@ -51,6 +46,7 @@ import {
   BIGGER_PICTURE,
   SEE_IT_WORK,
   WHAT_TO_EXPECT,
+  WHO_IT_FITS,
   FAQ,
   type RunStageState,
 } from "@/content/compliant-marketing";
@@ -291,23 +287,6 @@ export default function Page() {
           title={WHAT_IT_IS.title}
           dek={WHAT_IT_IS.dek}
         />
-        <div className="mt-10 grid gap-px border bg-border sm:grid-cols-2 lg:grid-cols-3">
-          {WHAT_IT_IS.stages.map((stage, i) => (
-            <div key={stage.name} className="bg-background p-5">
-              <div className="flex items-baseline gap-2">
-                <span className="font-mono text-sm text-brand-text">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span className="font-sans text-base font-semibold text-foreground">
-                  {stage.name}
-                </span>
-              </div>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                {stage.micro}
-              </p>
-            </div>
-          ))}
-        </div>
         <Stagger className="mt-10 grid gap-6 lg:grid-cols-3">
           <StaggerItem>
             <PanelFrame
@@ -626,27 +605,10 @@ export default function Page() {
         </div>
       </Section>
 
-      {/* Week one */}
+      {/* Week one to expansion — daily-brief visual + weeks-based roadmap */}
       <Section id="week-one">
         <SectionHeader eyebrow={WEEK_ONE.eyebrow} title={WEEK_ONE.title} dek={WEEK_ONE.lead} />
-        <div className="mt-10 grid gap-12 lg:grid-cols-2 lg:items-start">
-          <div className="flex flex-col gap-px border bg-border">
-            {WEEK_ONE.ladder.map((rung, i) => (
-              <div key={rung.name} className="flex gap-4 bg-background p-5">
-                <span className="font-mono text-sm text-brand-text">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <div>
-                  <h3 className="font-sans text-base font-semibold text-foreground">
-                    {rung.name}
-                  </h3>
-                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                    {rung.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+        <div className="mt-12 grid gap-12 lg:grid-cols-2 lg:items-start">
           <PanelFrame
             title={WEEK_ONE.feed.panelTitle}
             status={<Badge tone="info">{WEEK_ONE.feed.badge}</Badge>}
@@ -669,19 +631,8 @@ export default function Page() {
               {WEEK_ONE.feed.opening}
             </p>
           </PanelFrame>
+          <StepRail steps={GTM_ROADMAP.steps} />
         </div>
-      </Section>
-
-      {/* Go-to-market roadmap (weeks-based) */}
-      <Section id="roadmap">
-        <div className="max-w-160">
-          <Eyebrow>{GTM_ROADMAP.eyebrow}</Eyebrow>
-          <h2 className="mt-4 font-serif text-section lg:text-section-lg">
-            {GTM_ROADMAP.title}
-          </h2>
-          <p className="mt-5 text-dek text-muted-foreground">{GTM_ROADMAP.dek}</p>
-        </div>
-        <StepRail className="mt-12" steps={GTM_ROADMAP.steps} />
       </Section>
 
       {/* Use cases */}
@@ -717,25 +668,6 @@ export default function Page() {
         </Reveal>
         <p className="mt-8 max-w-3xl text-dek text-muted-foreground">
           {WHY_MADISON.moat}
-        </p>
-      </Section>
-
-      {/* The business case */}
-      <Section tone="sunken" bordered id="business-case">
-        <div className="max-w-160">
-          <Eyebrow>{BUSINESS_CASE.eyebrow}</Eyebrow>
-          <h2 className="mt-4 font-serif text-section lg:text-section-lg">
-            {BUSINESS_CASE.title}
-          </h2>
-          <p className="mt-5 text-dek text-muted-foreground">
-            {BUSINESS_CASE.intro}
-          </p>
-        </div>
-        <Reveal>
-          <StatBand items={BUSINESS_CASE.tiles} className="mt-12" />
-        </Reveal>
-        <p className="mt-6 font-mono text-xs text-muted-foreground">
-          {BUSINESS_CASE.footnote}
         </p>
       </Section>
 
@@ -803,26 +735,6 @@ export default function Page() {
         </div>
       </Section>
 
-      {/* Social proof — in pilot and production wordmarks */}
-      <Section tone="sunken" tight bordered>
-        <Eyebrow className="text-center">{PROOF.eyebrow}</Eyebrow>
-        <LogoWall names={PROOF.names} caption={PROOF.caption} />
-      </Section>
-
-      {/* Advisory board */}
-      <Section id="advisory">
-        <SectionHeader
-          align="center"
-          eyebrow={ADVISORY.eyebrow}
-          title={ADVISORY.title}
-          dek={ADVISORY.dek}
-          className="mx-auto"
-        />
-        <div className="mt-12">
-          <AdvisorCarousel advisors={ADVISORY.advisors} />
-        </div>
-      </Section>
-
       {/* See it work — Vault closing band with what to expect */}
       <Section tone="dark" id="contact">
         <div className="grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
@@ -850,21 +762,41 @@ export default function Page() {
               ))}
             </div>
           </div>
-          <div className="rounded-md border bg-card/60 p-6">
-            <div className="font-mono text-overline uppercase tracking-overline text-brand-text">
-              {WHAT_TO_EXPECT.label}
+          <div className="flex flex-col gap-6">
+            <div className="rounded-md border bg-card/60 p-6">
+              <div className="font-mono text-overline uppercase tracking-overline text-brand-text">
+                {WHAT_TO_EXPECT.label}
+              </div>
+              <ul className="mt-5 flex flex-col gap-px border-t">
+                {WHAT_TO_EXPECT.items.map((item) => (
+                  <li
+                    key={item}
+                    className="flex items-start gap-3 border-b py-3.5 text-sm text-muted-foreground"
+                  >
+                    <CheckIcon size={16} className="mt-0.5 shrink-0 text-brand-text" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
-            <ul className="mt-5 flex flex-col gap-px border-t">
-              {WHAT_TO_EXPECT.items.map((item) => (
-                <li
-                  key={item}
-                  className="flex items-start gap-3 border-b py-3.5 text-sm text-muted-foreground"
-                >
-                  <CheckIcon size={16} className="mt-0.5 shrink-0 text-brand-text" />
-                  {item}
-                </li>
-              ))}
-            </ul>
+            <div className="rounded-md border bg-card/60 p-6">
+              <div className="font-mono text-overline uppercase tracking-overline text-muted-foreground">
+                {WHO_IT_FITS.label}
+              </div>
+              <dl className="mt-5 flex flex-col gap-px border-t">
+                {WHO_IT_FITS.rows.map((row) => (
+                  <div
+                    key={row.label}
+                    className="flex items-baseline justify-between gap-4 border-b py-3"
+                  >
+                    <dt className="text-sm text-muted-foreground">{row.label}</dt>
+                    <dd className="text-right font-mono text-xs text-foreground">
+                      {row.value}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
           </div>
         </div>
       </Section>

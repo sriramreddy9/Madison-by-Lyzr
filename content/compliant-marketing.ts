@@ -86,7 +86,6 @@ export const PROBLEM = {
   title: "Same rulebook as the biggest banks. None of the staff.",
   paragraphs: [
     "Your marketing team is two to ten people. Every line of business, deposits, lending, cards, wealth, sends it work. Marketing produces every asset for every channel. And anything that states a rate or a term has to clear compliance and legal before it ships.",
-    "So one campaign takes four to five weeks to reach launch. The delay is not creativity. It is coordination and clearance. You are running the same regulatory gauntlet as a hundred-billion-dollar bank, with a fraction of the people and no dedicated data analyst or compliance desk of your own.",
   ],
   quote: "The bottleneck is not the work. It is getting the work through the gate.",
   diagram: {
@@ -104,20 +103,6 @@ export const WHAT_IT_IS = {
   eyebrow: "What it is",
   title: "One line in. A compliant, launch-ready campaign out.",
   dek: "Madison for Marketing takes a one-line brief and produces a segmented, multi-channel campaign that is already checked against your own compliance rulebook, built on your own customer and member data. Your team reviews and approves. Nothing regulated sends itself.",
-  stages: [
-    { name: "Brief", micro: "One line from the business." },
-    { name: "Segment", micro: "Your data, with fair-lending guardrails." },
-    { name: "Draft", micro: "On-brand copy for every channel." },
-    {
-      name: "Pre-clear",
-      micro: "Checked against your rulebook, disclosures inserted.",
-    },
-    {
-      name: "Human approves",
-      micro: "Marketer, then compliance. Independently.",
-    },
-    { name: "Launch", micro: "Through the tools you already send from." },
-  ],
   disclosureBadge: "Disclosure inserted",
   assets: {
     email: {
@@ -144,7 +129,7 @@ export const FOUNDATIONS = {
   eyebrow: "The foundations",
   brain: {
     title: "One brain. Every agent reads it and writes back to it.",
-    body: "Madison runs on one shared data layer for your institution: your CRM, your brand kit, your compliance rulebook, and the history of every campaign, approval, and outcome. Every agent works from the same source. There are no disconnected tools holding stale copies of your data.",
+    body: "Madison runs on one shared data layer for your institution: your CRM, your brand kit, your compliance rulebook, and the history of every campaign, approval, and outcome. Every agent works from the same source, so no disconnected tool holds a stale copy of your data.",
     hub: "One Brain",
     hubSub: "Shared data layer",
     fragments: [
@@ -225,7 +210,7 @@ export const AGENTS = {
   composer: {
     panelTitle: "Dynamic agent composer",
     heading: "Composed for your institution.",
-    body: "Madison builds agents on the fly from your brain: your rulebook, brand kit, product catalog, past campaigns, approval chains, and outcome history. These compound with every campaign you run and are specific to your institution. The longer you run Madison, the more it knows that no competitor can copy.",
+    body: "Madison builds agents on the fly from your brain: your rulebook, brand kit, product catalog, past campaigns, approval chains, and outcome history. They are specific to your institution and compound with every campaign, so the longer you run Madison, the more it knows that no competitor can copy.",
     fragmentsLabel: "Composed from brain fragments",
     fragments: [
       "Rulebook",
@@ -341,23 +326,9 @@ export const GOVERNANCE = {
 };
 
 export const WEEK_ONE = {
-  eyebrow: "Week one",
-  title: "Value in week one. No integration to start.",
+  eyebrow: "Week one to expansion",
+  title: "Value in week one. Expand from proof.",
   lead: "You do not connect a single system to see Madison work. On day zero, the Competitive and Rate Intelligence agent runs against public data and delivers a daily brief of local competitor rates, offers, and creative. It is useful immediately, and it earns the trust to go deeper: on-data segmentation, compliant campaign production, and launch through your own tools.",
-  ladder: [
-    {
-      name: "Land",
-      desc: "Public competitor and rate intelligence. No integration, value in week one.",
-    },
-    {
-      name: "Prove",
-      desc: "Return weeks to your team, with a visible trail that de-risks the exam.",
-    },
-    {
-      name: "Deepen",
-      desc: "Connect your CRM and send tools. Campaigns move from brief to compliant launch inside Madison.",
-    },
-  ],
   feed: {
     panelTitle: "Daily brief · scanning public rate sheets",
     badge: "No integration required",
@@ -408,22 +379,6 @@ export const USE_CASES = {
       name: "Competitor rate response",
       desc: "A daily read on local rates and offers, so you react in a day, not a cycle.",
     },
-    {
-      name: "Compliance pre-clearance",
-      desc: "First-pass-clean drafts against your own rulebook, before compliance ever opens them.",
-    },
-    {
-      name: "Fair-lending-aware targeting",
-      desc: "Segments built with disparate-impact checks so targeting is safe by construction.",
-    },
-    {
-      name: "Board and exam reporting",
-      desc: "Reporting generated from live activity, ready for the board packet and the examiner.",
-    },
-    {
-      name: "Social and reputation",
-      desc: "Monitored and drafted within your brand and compliance guardrails.",
-    },
   ],
 };
 
@@ -467,7 +422,7 @@ export const WHY_MADISON = {
       cells: ["Partial", "No", "Partial", "Yes"],
     },
   ],
-  moat: "A competitor can copy a workflow in a quarter. No one can copy your institution's own accumulated reasoning: every campaign, approval, and compliance decision, compounding on data that only you have. Add sovereign and on-premises deployment, and the case for ripping Madison out gets harder every month it runs.",
+  moat: "A competitor can copy a workflow in a quarter, but no one can copy your institution's own accumulated reasoning: every campaign, approval, and compliance decision, compounding on data that only you have. Add sovereign and on-premises deployment, and the case for ripping Madison out gets harder every month it runs.",
 };
 
 export const STACK = {
@@ -529,27 +484,17 @@ export const FAQ = {
     {
       question: "How is our data isolated?",
       answer:
-        "Single-tenant deployment in your region. No cross-tenant training, ever. Your data is never used to train shared models.",
+        "Single-tenant deployment in your region, inside your perimeter, in the cloud, on-premises, or fully air-gapped. No cross-tenant training, ever, and your data and your inference stay inside your boundary. Segments are built with disparate-impact guardrails, so fair-lending targeting is safe by construction.",
     },
     {
       question: "Can it send anything on its own?",
       answer:
-        "No. The rules decide, the model drafts and explains, and a marketer then a compliance officer approve independently. You set the autonomy level per function.",
+        "No regulated step sends itself. The rules decide, the model drafts and explains, and a marketer then a compliance officer approve independently. You set the autonomy level per function, and a human stays in the loop wherever it matters.",
     },
     {
-      question: "Do we replace our stack?",
+      question: "Do we replace our stack or our team?",
       answer:
-        "No. Madison is the layer on top of the core, CRM, and send tools you already run.",
-    },
-    {
-      question: "Does our data leave our environment?",
-      answer:
-        "No. Madison runs inside your perimeter, in the cloud, on-premises, or fully air-gapped. Your data and your inference stay inside your boundary.",
-    },
-    {
-      question: "Can an agent send a campaign on its own?",
-      answer:
-        "No regulated step sends itself. A marketer approves, then a compliance officer approves, independently. You set the autonomy level for every function, and a human stays in the loop wherever it matters.",
+        "Neither. Madison is the layer on top of the core, CRM, and send tools you already run, and it gives a two-to-ten-person team the output of a much larger one, returning the weeks you lose to coordination and clearance.",
     },
     {
       question: "How fast do we see value?",
@@ -560,21 +505,6 @@ export const FAQ = {
       question: "What does this do for our exam?",
       answer:
         "Every send, edit, and approval is logged in a native, exportable audit trail of what each agent read, what it did, and why. The record an examiner asks for already exists.",
-    },
-    {
-      question: "Does it replace our team or our agency?",
-      answer:
-        "No. It gives a two-to-ten-person team the output of a much larger one, and it returns the weeks you currently lose to coordination and clearance.",
-    },
-    {
-      question: "How does it handle fair lending?",
-      answer:
-        "Segments are built with disparate-impact guardrails in place, so targeting is safe by construction rather than reviewed after the fact.",
-    },
-    {
-      question: "What does it integrate with?",
-      answer:
-        "Your CRM and systems of record, your send tools such as Salesforce Marketing Cloud, Braze, and Banno, and specialist copy-scoring tools where you already use them.",
     },
   ],
 };
@@ -609,27 +539,6 @@ export const POSITIONING = {
       good: true,
     },
   ],
-};
-
-export const BUSINESS_CASE = {
-  eyebrow: "The business case",
-  title: "Measured. Attributed. Defensible.",
-  intro:
-    "Agree the baseline before deployment. Measure the change in production. Expand when the numbers make the case.",
-  tiles: [
-    { value: "Weeks to days", label: "Time from brief to cleared launch" },
-    {
-      value: "Output of a larger team",
-      label: "A team of two to ten ships like a big one",
-    },
-    {
-      value: "Every regulated send gated",
-      label: "Marketer, then compliance, independently",
-    },
-    { value: "Week one", label: "First value, with zero integration" },
-  ],
-  footnote:
-    "Illustrative until baselined with your team. We measure against agreed outcomes in production.",
 };
 
 export type SecTileIcon = "lock" | "shield" | "building" | "userCheck" | "layers";
@@ -757,5 +666,16 @@ export const WHAT_TO_EXPECT = {
     "A live run on one of your real, masked campaigns",
     "A reference architecture for your CISO",
     "A scoping document within 48 hours",
+  ],
+};
+
+export const WHO_IT_FITS = {
+  label: "Who it fits",
+  rows: [
+    { label: "Institution", value: "US bank or credit union" },
+    { label: "Size", value: "$1B to $10B in assets" },
+    { label: "Owner", value: "Head or VP of Marketing" },
+    { label: "Co-signer", value: "Compliance or Risk" },
+    { label: "Autonomy", value: "Recommend, human approves" },
   ],
 };
