@@ -238,8 +238,8 @@ export const DEPLOYMENT = {
   dek: "The first question a bank asks is where the data goes. The answer is nowhere. Madison installs inside your environment and operates above the systems you already run.",
   cells: [
     {
-      title: "On-prem or air-gapped",
-      body: "Your own data centre, your private cloud, or fully air-gapped. Employee data never leaves the building.",
+      title: "On-prem or private cloud",
+      body: "Your own data centre or your private cloud, deployed on-prem. Employee data never leaves the building.",
     },
     {
       title: "Redacted & private",
@@ -270,11 +270,6 @@ export const FAQ = {
   title: "Frequently asked questions",
   items: [
     {
-      question: "Does Madison HR source candidates?",
-      answer:
-        "No. Sourcing remains with the bank. Madison integrates with the channels already in use and begins once candidates enter the pipeline.",
-    },
-    {
       question: "Does an agent decide who is hired?",
       answer:
         "No. The agent scores each candidate against the role and writes out the reasoning so a recruiter can agree or overrule. Every override is recorded with its reason.",
@@ -282,7 +277,7 @@ export const FAQ = {
     {
       question: "Where does employee data sit?",
       answer:
-        "Inside your perimeter, in your region. Madison deploys on premise, in your private cloud or fully air-gapped. Personal data is redacted before it reaches any model.",
+        "Inside your perimeter, in your region. Madison deploys on premise or in your private cloud. Personal data is redacted before it reaches any model.",
     },
     {
       question: "How does Madison HR handle the EU AI Act?",
@@ -307,7 +302,7 @@ export const SOFTWARE_APP_JSONLD = {
   applicationCategory: "BusinessApplication",
   applicationSubCategory: "Human resources for banking",
   operatingSystem:
-    "On premise, private cloud or air-gapped, inside the institution",
+    "On premise or private cloud, inside the institution",
   description:
     "Governed AI agents for banking HR. Unified candidate intake with scoring and written rationale, an early screening call, an employee service desk connected to the HRMS, interview coordination, onboarding, learning and exit. Deployed in the bank's perimeter with a full audit trail. Every regulated decision is made by the bank.",
   featureList: [

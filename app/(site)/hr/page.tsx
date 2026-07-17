@@ -67,9 +67,9 @@ export default function Page() {
       />
 
       {/* Hero — Vault band */}
-      <section className="dark relative overflow-hidden bg-background py-16 text-foreground md:py-24">
+      <section className="dark relative flex min-h-svh items-center overflow-hidden bg-background py-16 text-foreground md:py-24">
         <HeroBackdrop src="/images/editorial/whiteboard.jpg" priority />
-        <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-6 lg:grid-cols-[1.1fr_1fr]">
+        <div className="relative mx-auto grid w-full max-w-6xl items-center gap-12 px-6 lg:grid-cols-[1.1fr_1fr]">
           <div>
             <Eyebrow>{HERO.eyebrow}</Eyebrow>
             <h1 className="mt-5 font-serif text-hero-sm sm:text-hero lg:text-hero-lg">

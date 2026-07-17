@@ -14,7 +14,7 @@ your team keeps every regulated call. Deployed in your perimeter.
 ## Governance
 
 Every regulated decision stays with a person; the agent prepares it and hands it
-over with reasoning attached. On-prem or air-gapped; EU AI Act aware;
+over with reasoning attached. On-prem or private cloud; EU AI Act aware;
 exportable audit trail.
 
 Book a demo: [/contact](/contact).

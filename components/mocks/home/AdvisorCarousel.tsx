@@ -25,9 +25,17 @@ export function AdvisorCarousel({ advisors }: { advisors: Advisor[] }) {
   const recalc = useCallback(() => {
     const el = viewportRef.current;
     if (!el) return;
-    setPages(Math.max(1, Math.ceil(el.scrollWidth / el.clientWidth)));
-    setPage(Math.round(el.scrollLeft / el.clientWidth));
-  }, []);
+    // Derive how many whole cards fit the viewport (1 / 2 / 3 by breakpoint),
+    // so page count matches what is shown and never leaves a partial peek.
+    const first = el.firstElementChild as HTMLElement | null;
+    const cardW = first?.clientWidth ?? el.clientWidth;
+    const styles = getComputedStyle(el);
+    const gap = parseFloat(styles.columnGap || styles.gap || "0") || 0;
+    const perView = Math.max(1, Math.round((el.clientWidth + gap) / (cardW + gap)));
+    const total = Math.max(1, Math.ceil(advisors.length / perView));
+    setPages(total);
+    setPage(Math.min(total - 1, Math.round(el.scrollLeft / el.clientWidth)));
+  }, [advisors.length]);
 
   useEffect(() => {
     recalc();
@@ -89,13 +97,13 @@ export function AdvisorCarousel({ advisors }: { advisors: Advisor[] }) {
         {advisors.map((advisor) => (
           <article
             key={advisor.name}
-            className="w-72 shrink-0 snap-start overflow-hidden border bg-card sm:w-80"
+            className="min-w-0 shrink-0 grow-0 basis-full snap-start overflow-hidden border bg-card sm:basis-[calc((100%-1.25rem)/2)] lg:basis-[calc((100%-2.5rem)/3)]"
           >
             <Figure
               src={advisor.photo}
               alt={advisor.name}
               ratio="portrait"
-              sizes="320px"
+              sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
             />
             <div className="p-5">
               <h3 className="font-sans text-base font-semibold text-foreground">
