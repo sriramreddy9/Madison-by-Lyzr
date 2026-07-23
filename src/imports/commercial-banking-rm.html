@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Commercial Banking — Madison for Commercial Banking</title>
+<meta name="description" content="The agentic AI layer for commercial banking. More revenue per RM, faster credit decisions, portfolio risk you can see early — on the systems you already run." />
+<script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: { extend: {
+    fontFamily: {
+      serif:['"Playfair Display"','Georgia','serif'],
+      sans:['"DM Sans"','system-ui','sans-serif'],
+      mono:['"JetBrains Mono"','monospace'],
+    },
+    colors:{ background:'#F9F5F1', foreground:'#1E1610', ink:'#1E1610',
+      secondary:'#F1EBE1', accent:'#EDE4D6', border:'#E8DFD3',
+      'muted-foreground':'#6B5E4F', ochre:'#B8874A' },
+    borderRadius:{ sm:'2px', md:'3px', lg:'4px', xl:'6px' },
+  }}
+}
+</script>
+<style>
+  :root { --background:#F9F5F1; --foreground:#1E1610; --secondary:#F1EBE1;
+    --border:#E8DFD3; --muted-foreground:#6B5E4F; --ochre:#B8874A; }
+  html { scroll-behavior:smooth; scroll-padding-top:80px; }
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
+  html,body { background:var(--background); color:var(--foreground); font-family:'DM Sans',sans-serif; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+  h1,h2,h3,h4 { font-family:'Playfair Display',serif; letter-spacing:-0.01em; }
+  ::selection { background:var(--foreground); color:#fff; }
+  .border-border{border-color:var(--border)} .bg-background{background:var(--background)}
+  .bg-secondary{background:var(--secondary)} .text-foreground{color:var(--foreground)}
+  .text-muted-foreground{color:var(--muted-foreground)}
+  .font-serif{font-family:'Playfair Display',serif} .font-mono{font-family:'JetBrains Mono',monospace}
+  .text-ochre{color:var(--ochre)} .bg-ochre{background:var(--ochre)} .border-ochre{border-color:var(--ochre)}
+  img{max-width:100%;height:auto}
+  .grid-lines{ background-image:
+    linear-gradient(to right, rgba(255,255,255,.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,.06) 1px, transparent 1px);
+    background-size:80px 80px; }
+  .tag{display:inline-flex;align-items:center;gap:.375rem;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted-foreground);font-weight:500}
+  @keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.35}}
+  .pulse-dot{animation:pulse-dot 1.6s ease-in-out infinite}
+  @keyframes fade-up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+  .fade-up{animation:fade-up .9s ease-out both}
+  @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .animate-marquee{animation:marquee 45s linear infinite}
+  .marquee-mask{-webkit-mask-image:linear-gradient(to right,transparent,black 8%,black 92%,transparent);mask-image:linear-gradient(to right,transparent,black 8%,black 92%,transparent)}
+  .nav-shell{transition:background-color .35s ease,border-color .35s ease,backdrop-filter .35s ease,color .35s ease}
+  .nav-link{position:relative}
+  .nav-link::after{content:'';position:absolute;left:0;right:0;bottom:-6px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .35s ease}
+  .nav-link:hover::after,.nav-link.active::after{transform:scaleX(1)}
+  .dropdown{opacity:0;visibility:hidden;transform:translateY(6px);transition:all .25s ease}
+  .has-dropdown:hover .dropdown,.has-dropdown:focus-within .dropdown{opacity:1;visibility:visible;transform:none}
+  .has-dropdown:hover .chev,.has-dropdown:focus-within .chev{transform:rotate(180deg)}
+  .chev{transition:transform .3s ease}
+  .rule{height:1px;background:var(--border)}
+  .ochre-rule{height:1px;background:linear-gradient(to right,transparent,var(--ochre),transparent)}
+  .hair{border-color:rgba(255,255,255,.14)}
+</style>
+</head>
+<body class="min-h-screen">
+
+<header id="site-nav" class="nav-shell fixed inset-x-0 top-0 z-50 border-b border-transparent text-white">
+  <div class="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-4">
+    <a href="index.html" class="font-serif text-2xl tracking-tight">Madison</a>
+    <nav class="hidden items-center gap-9 text-sm md:flex">
+      <a href="index.html#platform" class="nav-link">Platform</a>
+      <a href="index.html#coverage" class="nav-link">Coverage</a>
+      <a href="index.html#solutions" class="nav-link">Solutions</a>
+      <div class="has-dropdown relative">
+        <button class="nav-link inline-flex items-center gap-1">For your team
+          <svg class="chev h-3.5 w-3.5" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="dropdown absolute left-1/2 top-full mt-4 w-[520px] -translate-x-1/2 border border-border bg-background p-4 text-foreground shadow-[0_30px_80px_-30px_rgba(0,0,0,.35)]">
+          <p class="tag mb-3 px-2">For your team</p>
+          <ul class="grid grid-cols-2 gap-1 text-sm">
+            <li><a href="commercial-banking-rm.html" class="flex items-center justify-between rounded-sm px-3 py-2 hover:bg-secondary">Commercial Banking</a></li>
+            <li><a href="retail-cross-sell.html" class="flex items-center justify-between rounded-sm px-3 py-2 hover:bg-secondary">Retail Banking</a></li>
+            <li><a href="deal-intelligence.html" class="flex items-center justify-between rounded-sm px-3 py-2 hover:bg-secondary">Deal Intelligence</a></li>
+            <li><a href="compliant-marketing.html" class="flex items-center justify-between rounded-sm px-3 py-2 hover:bg-secondary">Compliant Marketing</a></li>
+            <li><a href="risk-compliance.html" class="flex items-center justify-between rounded-sm px-3 py-2 hover:bg-secondary">Risk &amp; Compliance</a></li>
+            <li><a href="dispute-resolution.html" class="flex items-center justify-between rounded-sm px-3 py-2 hover:bg-secondary">Dispute Resolution</a></li>
+            <li><a href="hr.html" class="flex items-center justify-between rounded-sm px-3 py-2 hover:bg-secondary">HR</a></li>
+          </ul>
+        </div>
+      </div>
+      <a href="index.html#governance" class="nav-link">Governance</a>
+      <a href="index.html#advisors" class="nav-link">Advisors</a>
+    </nav>
+    <a href="#contact" class="hidden rounded-sm border border-current px-4 py-2 text-xs md:inline-flex">Request a demo</a>
+    <button id="nav-toggle" aria-label="Menu" class="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-sm border border-current"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+  <div id="nav-mobile" class="hidden border-t border-current/20 bg-background text-foreground md:hidden">
+    <div class="mx-auto max-w-[1400px] px-6 py-4 flex flex-col gap-1 text-sm">
+      <a href="index.html#platform" class="py-2">Platform</a>
+      <a href="index.html#coverage" class="py-2">Coverage</a>
+      <a href="index.html#solutions" class="py-2">Solutions</a>
+      <a href="commercial-banking-rm.html" class="py-2">Commercial Banking</a>
+      <a href="retail-cross-sell.html" class="py-2">Retail Banking</a>
+      <a href="deal-intelligence.html" class="py-2">Deal Intelligence</a>
+      <a href="compliant-marketing.html" class="py-2">Compliant Marketing</a>
+      <a href="risk-compliance.html" class="py-2">Risk &amp; Compliance</a>
+      <a href="dispute-resolution.html" class="py-2">Dispute Resolution</a>
+      <a href="hr.html" class="py-2">HR</a>
+      <a href="index.html#governance" class="py-2">Governance</a>
+      <a href="#contact" class="mt-2 inline-flex rounded-sm border border-current px-4 py-2 text-xs w-fit">Request a demo</a>
+    </div>
+  </div>
+</header>
+
+<section class="relative isolate overflow-hidden text-white">
+  <img src="https://id-preview--3a3c2193-ea3d-443b-bd3f-3ece099afa34.lovable.app/__l5e/assets-v1/942f099b-dfbb-44cf-ad86-dfb8f36a6a31/front-office.jpg" alt="" class="absolute inset-0 -z-10 h-full w-full object-cover" />
+  <div class="absolute inset-0 -z-10" style="background:linear-gradient(135deg,rgba(0,0,0,.86),rgba(0,0,0,.55),rgba(0,0,0,.2))"></div>
+  <div class="absolute inset-0 -z-10 grid-lines opacity-40"></div>
+  <div class="relative mx-auto max-w-[1400px] px-6 pb-24 pt-40 md:pb-40 md:pt-48">
+    <p class="mb-6 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-3 py-1 text-[11px] uppercase tracking-[0.22em] text-white/85 backdrop-blur">
+      <span class="h-1.5 w-1.5 rounded-full bg-white pulse-dot"></span> Madison for Commercial Banking
+    </p>
+    <h1 class="max-w-[18ch] font-serif text-[46px] leading-[0.98] tracking-tight sm:text-[68px] md:text-[88px] fade-up">Grow the commercial book — <em class="italic text-white/90">without replacing your core.</em></h1>
+    <p class="mt-8 max-w-2xl text-lg text-white/85">The agentic AI layer for commercial banking. More revenue capacity per relationship manager, faster and more consistent credit decisions, and portfolio risk you can see early — running on the systems you already run.</p>
+    <div class="mt-10 flex flex-wrap items-center gap-3">
+      <a href="#contact" class="inline-flex items-center gap-2 rounded-sm bg-white px-5 py-3 text-sm font-medium text-foreground hover:opacity-90">Become a design partner →</a>
+      <a href="#chapter-1" class="inline-flex items-center gap-2 rounded-sm border border-white/30 px-5 py-3 text-sm font-medium text-white hover:bg-white/10">Explore the workspaces</a>
+    </div>
+    <div class="mt-14 grid max-w-4xl grid-cols-2 gap-x-6 gap-y-3 sm:grid-cols-4"><div class="flex items-start gap-2 text-[13px] text-white/85"><span class="mt-1 h-3 w-3 rounded-full border border-white/60"></span>Live in weeks</div><div class="flex items-start gap-2 text-[13px] text-white/85"><span class="mt-1 h-3 w-3 rounded-full border border-white/60"></span>Not a multi-year build</div><div class="flex items-start gap-2 text-[13px] text-white/85"><span class="mt-1 h-3 w-3 rounded-full border border-white/60"></span>Runs in your perimeter</div><div class="flex items-start gap-2 text-[13px] text-white/85"><span class="mt-1 h-3 w-3 rounded-full border border-white/60"></span>Human on every decision</div></div>
+  </div>
+</section>
+
+<section class="border-y border-border bg-secondary/60">
+  <div class="mx-auto max-w-[1400px] grid grid-cols-2 md:grid-cols-4 divide-x divide-border">
+      <div class="px-8 py-10">
+        <p class="font-serif text-5xl">−72%</p>
+        <p class="mt-3 text-sm text-muted-foreground">Prep time saved per RM</p>
+      </div>
+      <div class="px-8 py-10">
+        <p class="font-serif text-5xl"><24h</p>
+        <p class="mt-3 text-sm text-muted-foreground">Meeting to follow-through</p>
+      </div>
+      <div class="px-8 py-10">
+        <p class="font-serif text-5xl">6 wks</p>
+        <p class="mt-3 text-sm text-muted-foreground">Deployed in production</p>
+      </div>
+      <div class="px-8 py-10">
+        <p class="font-serif text-5xl">€4.2M</p>
+        <p class="mt-3 text-sm text-muted-foreground">Opportunity surfaced</p>
+      </div></div>
+</section>
+<section class="border-b border-border">
+  <div class="mx-auto max-w-[1400px] px-6 py-24 md:py-28 grid gap-10 md:grid-cols-12 items-center">
+    <div class="md:col-span-6 ">
+      <div class="relative aspect-[5/4] overflow-hidden bg-secondary">
+        <img src="https://id-preview--3a3c2193-ea3d-443b-bd3f-3ece099afa34.lovable.app/__l5e/assets-v1/942f099b-dfbb-44cf-ad86-dfb8f36a6a31/back-office.jpg" alt="" class="absolute inset-0 h-full w-full object-cover" />
+        <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(0,0,0,.55),transparent 50%)"></div>
+      </div>
+    </div>
+    <div class="md:col-span-6">
+      <p class="tag">How it fits</p>
+      <h2 class="mt-4 font-serif text-4xl leading-[1.05] tracking-tight sm:text-5xl">One relationship. One shared context. Every team moving together.</h2>
+      <p class="mt-6 text-lg text-muted-foreground">Madison carries context and coordinates work across the relationship — from the first conversation through credit, service and portfolio growth. Not a new core. Not another copilot.</p>
+      <ul class="mt-8"><li class="flex gap-3 border-t border-border py-4"><span class="font-mono text-xs text-ochre">01</span><span class="text-sm">Relationship — start every meeting with the full picture, what changed and what to act on next.</span></li><li class="flex gap-3 border-t border-border py-4"><span class="font-mono text-xs text-ochre">02</span><span class="text-sm">Credit — gather information, prepare analysis, coordinate review with context intact.</span></li><li class="flex gap-3 border-t border-border py-4"><span class="font-mono text-xs text-ochre">03</span><span class="text-sm">Service — route requests, coordinate resolution, keep the RM out of the middle.</span></li><li class="flex gap-3 border-t border-border py-4"><span class="font-mono text-xs text-ochre">04</span><span class="text-sm">Portfolio — surface emerging risk, growth opportunity, next best action across the book.</span></li></ul>
+    </div>
+  </div>
+</section>
+<section class="border-b border-border bg-background">
+  <div class="mx-auto max-w-[1400px] px-6 py-24 md:py-28">
+    <div class="mb-14 max-w-4xl">
+      <p class="tag" style="color:var(--muted-foreground)">Workspaces</p>
+      <h2 class="mt-4 font-serif text-4xl leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">From relationship to credit to portfolio.</h2>
+      <p class="mt-6 text-lg text-muted-foreground">Start with the workflow that matters most. Each workspace connects people, context, and action on the same orchestration layer.</p>
+    </div>
+    <div class="grid gap-0 md:grid-cols-2 border border-border">
+      <article class="group flex flex-col gap-6 border border-border p-8 transition hover:bg-foreground hover:text-white">
+        <div class="flex items-baseline justify-between">
+          <span class="font-mono text-[11px] tracking-widest text-muted-foreground group-hover:opacity-70">01</span>
+          <span class="h-px w-8 bg-ochre"></span>
+        </div>
+        <div>
+          <h3 class="font-serif text-2xl leading-tight">RM Copilot</h3>
+          <p class="mt-4 text-sm text-muted-foreground group-hover:text-white/75">The Brief, the Meeting, the Follow-through, the Relationship Plan — the full picture before the conversation and coordinated actions after it.</p>
+        </div>
+      </article>
+      <article class="group flex flex-col gap-6 border border-border p-8 transition hover:bg-foreground hover:text-white">
+        <div class="flex items-baseline justify-between">
+          <span class="font-mono text-[11px] tracking-widest text-muted-foreground group-hover:opacity-70">02</span>
+          <span class="h-px w-8 bg-ochre"></span>
+        </div>
+        <div>
+          <h3 class="font-serif text-2xl leading-tight">Credit</h3>
+          <p class="mt-4 text-sm text-muted-foreground group-hover:text-white/75">The Opportunity, Underwriting, Decision, Monitoring — get to decision-ready faster and stay ahead of covenants and conditions.</p>
+        </div>
+      </article>
+      <article class="group flex flex-col gap-6 border border-border p-8 transition hover:bg-foreground hover:text-white">
+        <div class="flex items-baseline justify-between">
+          <span class="font-mono text-[11px] tracking-widest text-muted-foreground group-hover:opacity-70">03</span>
+          <span class="h-px w-8 bg-ochre"></span>
+        </div>
+        <div>
+          <h3 class="font-serif text-2xl leading-tight">Client Service</h3>
+          <p class="mt-4 text-sm text-muted-foreground group-hover:text-white/75">The Request, Coordination, Resolution, Communication — the right teams moving, the right people informed.</p>
+        </div>
+      </article>
+      <article class="group flex flex-col gap-6 border border-border p-8 transition hover:bg-foreground hover:text-white">
+        <div class="flex items-baseline justify-between">
+          <span class="font-mono text-[11px] tracking-widest text-muted-foreground group-hover:opacity-70">04</span>
+          <span class="h-px w-8 bg-ochre"></span>
+        </div>
+        <div>
+          <h3 class="font-serif text-2xl leading-tight">Portfolio Growth</h3>
+          <p class="mt-4 text-sm text-muted-foreground group-hover:text-white/75">The Signal, Priority, Opportunity, Action — meaningful shifts across the book turned into next best step for the right person.</p>
+        </div>
+      </article></div>
+  </div>
+</section>
+<section class="relative overflow-hidden border-b border-border bg-foreground text-white">
+  <div class="absolute inset-0 opacity-20"><img src="https://id-preview--3a3c2193-ea3d-443b-bd3f-3ece099afa34.lovable.app/__l5e/assets-v1/942f099b-dfbb-44cf-ad86-dfb8f36a6a31/section-governance.jpg" class="h-full w-full object-cover" alt=""/></div>
+  <div class="absolute inset-0 grid-lines opacity-30"></div>
+  <div class="relative mx-auto max-w-[1400px] px-6 py-24 md:py-32 grid gap-14 md:grid-cols-12">
+    <div class="md:col-span-5">
+      <p class="tag" style="color:rgba(255,255,255,.6)">Live client brief · 08:42</p>
+      <h2 class="mt-4 font-serif text-4xl leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">The brief the RM walks in with.</h2>
+      <p class="mt-6 text-lg text-white/80">Signals, sentiment, and the working-capital timing that changes the conversation — pre-assembled before every meeting.</p>
+    </div>
+    <div class="md:col-span-7"><div class="border border-white/10 bg-black/40 backdrop-blur">
+        <div class="flex items-center justify-between border-b border-white/10 px-6 py-4 text-xs text-white/70"><span class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-ochre pulse-dot"></span>Live · Signals: 4 new</span><span class="font-mono">Ashfield Logistics</span></div>
+        <div class="grid grid-cols-3 divide-x divide-white/10">
+          <div class="px-6 py-6"><p class="text-[11px] uppercase tracking-widest text-white/50">Revolver util.</p><p class="mt-2 font-serif text-3xl">83%</p><p class="mt-1 text-xs text-ochre">▲ 9pp</p></div>
+          <div class="px-6 py-6"><p class="text-[11px] uppercase tracking-widest text-white/50">DSO</p><p class="mt-2 font-serif text-3xl">64</p><p class="mt-1 text-xs text-ochre">▲ 7</p></div>
+          <div class="px-6 py-6"><p class="text-[11px] uppercase tracking-widest text-white/50">CFO sentiment</p><p class="mt-2 font-serif text-2xl">Cautious</p><p class="mt-1 text-xs text-white/60">30d</p></div>
+        </div>
+        <div class="border-t border-white/10 px-6 py-5 text-sm text-white/90">Lead with the DSO conversation. Ashfield's Q3 board deck flagged a new distribution contract; ask about working-capital timing before pitching the FX hedge.</div>
+      </div></div>
+  </div>
+</section>
+<section class="border-b border-border">
+  <div class="mx-auto max-w-[1100px] px-6 py-24 md:py-28 text-center">
+    <p class="font-serif text-4xl md:text-6xl leading-[1.05] tracking-tight">&ldquo;Madison prepares the inputs. Credit, pricing, and relationship calls stay with your people.&rdquo;</p>
+    <p class="mt-8 text-sm text-muted-foreground">— Governance principle · Trust &amp; sovereignty</p>
+    <div class="mx-auto mt-10 ochre-rule w-40"></div>
+  </div>
+</section>
+<section class="border-b border-border">
+  <div class="mx-auto max-w-[1400px] px-6 py-24 md:py-28">
+    <div class="mb-6 max-w-4xl"><p class="tag">Roadmap</p>
+      <h2 class="mt-4 font-serif text-4xl leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">Start with one workflow. Prove value in weeks.</h2>
+      <p class="mt-6 text-lg text-muted-foreground">One high-value workflow, a focused team, and the systems needed to make it work. Measure the impact, then expand from proof.</p></div>
+    
+      <div class="grid gap-6 md:grid-cols-12 py-8 border-t border-border">
+        <div class="md:col-span-2 font-mono text-sm text-ochre">STEP 01</div>
+        <div class="md:col-span-4"><h3 class="font-serif text-2xl">Scope &amp; connect · weeks 1–2</h3></div>
+        <div class="md:col-span-6 text-muted-foreground">Choose one workflow, one team, and the systems needed to deliver value. Agree the baseline before deployment.</div>
+      </div>
+      <div class="grid gap-6 md:grid-cols-12 py-8 border-t border-border">
+        <div class="md:col-span-2 font-mono text-sm text-ochre">STEP 02</div>
+        <div class="md:col-span-4"><h3 class="font-serif text-2xl">Go live · weeks 3–6</h3></div>
+        <div class="md:col-span-6 text-muted-foreground">First workflow in production. Governed, measurable, additive to the stack you already run.</div>
+      </div>
+      <div class="grid gap-6 md:grid-cols-12 py-8 border-t border-border">
+        <div class="md:col-span-2 font-mono text-sm text-ochre">STEP 03</div>
+        <div class="md:col-span-4"><h3 class="font-serif text-2xl">Measure &amp; attribute</h3></div>
+        <div class="md:col-span-6 text-muted-foreground">Baseline vs. production, attribution against agreed outcomes. Defensible, not just impressive.</div>
+      </div>
+      <div class="grid gap-6 md:grid-cols-12 py-8 border-t border-border">
+        <div class="md:col-span-2 font-mono text-sm text-ochre">STEP 04</div>
+        <div class="md:col-span-4"><h3 class="font-serif text-2xl">Expand from proof</h3></div>
+        <div class="md:col-span-6 text-muted-foreground">Add the next workflow once the numbers make the case. One relationship, one shared context, more teams moving together.</div>
+      </div>
+  </div>
+</section>
+<section class="border-b border-border bg-secondary">
+  <div class="mx-auto max-w-[1400px] px-6 py-24 md:py-28">
+    <div class="mb-10 max-w-4xl"><p class="tag">Trust &amp; sovereignty</p>
+      <h2 class="mt-4 font-serif text-4xl leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">Built to pass second-line review.</h2>
+      <p class="mt-6 text-lg text-muted-foreground">Because your compliance team reads landing pages too — and we designed this one for them.</p></div>
+    <div class="overflow-x-auto border border-border bg-background">
+      <table class="w-full"><thead class="bg-secondary/60"><tr><th class="px-6 py-4 text-left text-[11px] uppercase tracking-[0.22em] text-muted-foreground">Guarantee</th><th class="px-6 py-4 text-left text-[11px] uppercase tracking-[0.22em] text-muted-foreground">How it shows up</th><th class="px-6 py-4 text-left text-[11px] uppercase tracking-[0.22em] text-ochre">What the reviewer gets</th></tr></thead><tbody><tr class="border-t border-border"><td class="px-6 py-5 align-top text-sm text-muted-foreground">The banker always decides</td><td class="px-6 py-5 align-top text-sm text-muted-foreground">Prepares inputs.</td><td class="px-6 py-5 align-top text-sm font-medium">Credit, pricing, and relationship calls stay with your people.</td></tr><tr class="border-t border-border"><td class="px-6 py-5 align-top text-sm text-muted-foreground">Auditable, always</td><td class="px-6 py-5 align-top text-sm text-muted-foreground">Every brief, note, draft.</td><td class="px-6 py-5 align-top text-sm font-medium">Versioned, attributable, exportable to your evidence store.</td></tr><tr class="border-t border-border"><td class="px-6 py-5 align-top text-sm text-muted-foreground">Human in the loop</td><td class="px-6 py-5 align-top text-sm text-muted-foreground">No autonomous sends.</td><td class="px-6 py-5 align-top text-sm font-medium">Sign-off is a first-class citizen — no shadow decisions.</td></tr><tr class="border-t border-border"><td class="px-6 py-5 align-top text-sm text-muted-foreground">BYO-LLM</td><td class="px-6 py-5 align-top text-sm text-muted-foreground">Your Azure OpenAI, AWS Bedrock, private.</td><td class="px-6 py-5 align-top text-sm font-medium">Your keys, your logs, your controls.</td></tr><tr class="border-t border-border"><td class="px-6 py-5 align-top text-sm text-muted-foreground">Your tenancy</td><td class="px-6 py-5 align-top text-sm text-muted-foreground">EU or in-country data residency.</td><td class="px-6 py-5 align-top text-sm font-medium">No cross-tenant training. Ever.</td></tr><tr class="border-t border-border"><td class="px-6 py-5 align-top text-sm text-muted-foreground">Your systems</td><td class="px-6 py-5 align-top text-sm text-muted-foreground">M365, Salesforce/Dynamics, nCino, S/4HANA.</td><td class="px-6 py-5 align-top text-sm font-medium">Additive, not replacement.</td></tr></tbody></table>
+    </div>
+  </div>
+</section>
+<!-- CONTACT -->
+<section id="contact" class="border-y border-border bg-secondary">
+  <div class="mx-auto max-w-[1400px] px-6 py-24 md:py-32 grid gap-12 md:grid-cols-12">
+    <div class="md:col-span-7">
+      <p class="tag">Design partner program · open</p>
+      <h2 class="mt-4 font-serif text-4xl leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">Start with the workflow that matters most.</h2>
+      <p class="mt-6 max-w-xl text-lg text-muted-foreground">A working session with your commercial banking and risk leadership. We agree the baseline, name the outcome, and put one workflow in production.</p>
+      <div class="mt-8 flex flex-wrap items-center gap-3">
+        <a href="mailto:hello@madison.example" class="inline-flex items-center gap-2 rounded-sm bg-foreground px-5 py-3 text-sm text-background hover:opacity-90">Request a demo →</a>
+        <a href="index.html" class="inline-flex items-center gap-2 rounded-sm border border-border px-5 py-3 text-sm hover:bg-background">Back to Madison</a>
+      </div>
+    </div>
+    <aside class="md:col-span-5 border border-border bg-background p-8">
+      <p class="tag">Who it fits</p>
+      <dl class="mt-5 divide-y divide-border text-sm">
+        <div class="flex items-center justify-between py-3"><dt class="text-muted-foreground">Institution</dt><dd class="font-medium text-right">Commercial &amp; corporate bank</dd></div><div class="flex items-center justify-between py-3"><dt class="text-muted-foreground">Size</dt><dd class="font-medium text-right">$5B–$100B in assets</dd></div><div class="flex items-center justify-between py-3"><dt class="text-muted-foreground">Owner</dt><dd class="font-medium text-right">Head of Commercial Banking</dd></div><div class="flex items-center justify-between py-3"><dt class="text-muted-foreground">Co-signer</dt><dd class="font-medium text-right">CRO / Chief Credit Officer</dd></div><div class="flex items-center justify-between py-3"><dt class="text-muted-foreground">Autonomy</dt><dd class="font-medium text-right">Recommend · human approves</dd></div>
+      </dl>
+    </aside>
+  </div>
+</section>
+
+<footer class="bg-foreground text-white">
+  <div class="mx-auto max-w-[1400px] px-6 py-16 grid gap-10 md:grid-cols-12">
+    <div class="md:col-span-5">
+      <p class="font-serif text-3xl">Madison</p>
+      <p class="mt-3 max-w-md text-sm text-white/70">The Agentic Banking OS — governed AI agents for banks and credit unions. Built on Lyzr.</p>
+    </div>
+    <div class="md:col-span-7 grid grid-cols-2 gap-8 sm:grid-cols-4 text-sm">
+      <div><p class="text-[11px] uppercase tracking-[0.24em] text-white/50">Platform</p>
+        <ul class="mt-3 space-y-2 text-white/85"><li><a href="index.html#platform">Platform</a></li><li><a href="index.html#solutions">Solutions</a></li><li><a href="index.html#governance">Governance</a></li></ul></div>
+      <div><p class="text-[11px] uppercase tracking-[0.24em] text-white/50">Teams</p>
+        <ul class="mt-3 space-y-2 text-white/85"><li><a href="commercial-banking-rm.html">Commercial</a></li><li><a href="retail-cross-sell.html">Retail</a></li><li><a href="risk-compliance.html">Risk</a></li><li><a href="hr.html">HR</a></li></ul></div>
+      <div><p class="text-[11px] uppercase tracking-[0.24em] text-white/50">Company</p>
+        <ul class="mt-3 space-y-2 text-white/85"><li>About</li><li>Pricing</li><li>Privacy</li></ul></div>
+      <div><p class="text-[11px] uppercase tracking-[0.24em] text-white/50">Get in touch</p>
+        <ul class="mt-3 space-y-2 text-white/85"><li>Book a demo</li><li>Talk to our team</li><li>Security overview</li></ul></div>
+    </div>
+  </div>
+  <div class="border-t border-white/10">
+    <div class="mx-auto max-w-[1400px] px-6 py-6 flex flex-wrap items-center justify-between gap-3 text-xs text-white/55">
+      <p>© 2026 Madison. All rights reserved.</p>
+      <p>Built for New York, deployed worldwide.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('site-nav');
+  const onScroll = () => {
+    if (window.scrollY > 60) {
+      nav.classList.remove('text-white');
+      nav.classList.add('text-foreground','border-border','bg-background/85','backdrop-blur');
+      nav.style.backdropFilter='saturate(140%) blur(10px)';
+    } else {
+      nav.classList.add('text-white');
+      nav.classList.remove('text-foreground','border-border','bg-background/85','backdrop-blur');
+      nav.style.backdropFilter='';
+    }
+  };
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+  const navToggle = document.getElementById('nav-toggle');
+  const navMobile = document.getElementById('nav-mobile');
+  navToggle?.addEventListener('click',()=>navMobile.classList.toggle('hidden'));
+  navMobile?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navMobile.classList.add('hidden')));
+</script>
+</body></html>

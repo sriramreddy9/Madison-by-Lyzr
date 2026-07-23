@@ -1,0 +1,712 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Madison — The Agentic Banking OS</title>
+<meta name="description" content="Governed AI agents across every banking function. One platform, your perimeter, your control. Built for New York, deployed worldwide." />
+<script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        serif: ['"Playfair Display"', 'ui-serif', 'Georgia', 'serif'],
+        sans: ['"DM Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+      },
+      colors: {
+        background: '#F9F5F1',
+        foreground: '#1E1610',
+        ink: '#1E1610',
+        secondary: '#F1EBE1',
+        accent: '#EDE4D6',
+        border: '#E8DFD3',
+        'muted-foreground': '#6B5E4F',
+        ochre: '#B8874A',
+      },
+      borderRadius: { sm: '2px', md: '3px', lg: '4px', xl: '6px' },
+    }
+  }
+}
+</script>
+<style>
+  :root {
+    --background:#F9F5F1; --foreground:#1E1610; --secondary:#F1EBE1;
+    --border:#E8DFD3; --muted-foreground:#6B5E4F;
+  }
+  html { scroll-behavior:smooth; scroll-padding-top:80px; }
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
+  html, body { background:var(--background); color:var(--foreground); font-family:'DM Sans',sans-serif; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+  h1,h2,h3,h4 { font-family:'Playfair Display',serif; letter-spacing:-0.01em; }
+  ::selection { background:var(--foreground); color:#fff; }
+  .border-border { border-color:var(--border); }
+  .bg-background { background:var(--background); }
+  .bg-secondary { background:var(--secondary); }
+  .text-foreground { color:var(--foreground); }
+  .text-muted-foreground { color:var(--muted-foreground); }
+  .font-serif { font-family:'Playfair Display',serif; }
+  .font-mono { font-family:'JetBrains Mono',monospace; }
+  img { max-width:100%; height:auto; }
+
+  .grid-lines {
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,.06) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+  .tag { display:inline-flex; align-items:center; gap:.375rem; font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--muted-foreground); font-weight:500; }
+
+  @keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:.35} }
+  .pulse-dot { animation:pulse-dot 1.6s ease-in-out infinite; }
+  @keyframes fade-up { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
+  .fade-up { animation:fade-up .9s ease-out both; }
+  @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+  .animate-marquee { animation:marquee 45s linear infinite; }
+  .marquee-mask {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  }
+
+  /* Nav */
+  .nav-shell { transition: background-color .35s ease, border-color .35s ease, backdrop-filter .35s ease, color .35s ease; }
+  .nav-link { position:relative; }
+  .nav-link::after {
+    content:''; position:absolute; left:0; right:0; bottom:-6px; height:1px;
+    background:currentColor; transform:scaleX(0); transform-origin:left;
+    transition:transform .35s ease;
+  }
+  .nav-link:hover::after, .nav-link.active::after { transform:scaleX(1); }
+  .dropdown { opacity:0; visibility:hidden; transform:translateY(6px); transition:all .25s ease; }
+  .has-dropdown:hover .dropdown, .has-dropdown:focus-within .dropdown { opacity:1; visibility:visible; transform:none; }
+  .has-dropdown:hover .chev, .has-dropdown:focus-within .chev { transform:rotate(180deg); }
+  .chev { transition: transform .3s ease; }
+</style>
+</head>
+<body class="min-h-screen">
+
+<!-- ===================== NAV ===================== -->
+<header id="site-nav" class="nav-shell fixed inset-x-0 top-0 z-50 border-b border-transparent text-white">
+  <div class="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-4">
+    <a href="#top" class="font-serif text-2xl tracking-tight">Madison</a>
+    <nav class="hidden items-center gap-9 text-sm md:flex">
+      <a href="#platform" class="nav-link" data-spy="platform">Platform</a>
+      <a href="#coverage" class="nav-link" data-spy="coverage">Coverage</a>
+      <a href="#solutions" class="nav-link" data-spy="solutions">Solutions</a>
+      <div class="has-dropdown relative">
+        <button class="nav-link inline-flex items-center gap-1">For your team
+          <svg class="chev h-3.5 w-3.5" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="dropdown absolute left-1/2 top-full mt-4 w-[520px] -translate-x-1/2 border border-border bg-background p-4 text-foreground shadow-[0_30px_80px_-30px_rgba(0,0,0,.35)]">
+          <p class="tag mb-3 px-2">For your team</p>
+          <ul class="grid grid-cols-2 gap-1 text-sm">
+            <li><a href="commercial-banking-rm.html" class="flex items-center justify-between rounded-sm px-3 py-2 hover:bg-secondary">Commercial Banking</a></li>
+            <li><a href="retail-cross-sell.html" class="flex items-center justify-between rounded-sm px-3 py-2 hover:bg-secondary">Retail Banking</a></li>
+            <li><a href="deal-intelligence.html" class="flex items-center justify-between rounded-sm px-3 py-2 hover:bg-secondary">Deal Intelligence</a></li>
+            <li><a href="compliant-marketing.html" class="flex items-center justify-between rounded-sm px-3 py-2 hover:bg-secondary">Compliant Marketing</a></li>
+            <li><a href="#" class="flex items-center justify-between rounded-sm px-3 py-2 hover:bg-secondary">Underwriting <span class="rounded-full border border-border px-2 py-0.5 text-[9px] uppercase tracking-widest text-muted-foreground">Soon</span></a></li>
+            <li><a href="#" class="flex items-center justify-between rounded-sm px-3 py-2 hover:bg-secondary">KYC <span class="rounded-full border border-border px-2 py-0.5 text-[9px] uppercase tracking-widest text-muted-foreground">Soon</span></a></li>
+            <li><a href="risk-compliance.html" class="flex items-center justify-between rounded-sm px-3 py-2 hover:bg-secondary">Risk &amp; Compliance</a></li>
+            <li><a href="#" class="flex items-center justify-between rounded-sm px-3 py-2 hover:bg-secondary">Reconciliations <span class="rounded-full border border-border px-2 py-0.5 text-[9px] uppercase tracking-widest text-muted-foreground">Soon</span></a></li>
+            <li><a href="dispute-resolution.html" class="flex items-center justify-between rounded-sm px-3 py-2 hover:bg-secondary">Dispute Resolution</a></li>
+            <li><a href="hr.html" class="flex items-center justify-between rounded-sm px-3 py-2 hover:bg-secondary">HR</a></li>
+          </ul>
+        </div>
+      </div>
+      <a href="#governance" class="nav-link" data-spy="governance">Governance</a>
+      <a href="#advisors" class="nav-link" data-spy="advisors">Advisors</a>
+    </nav>
+    <a href="#contact" class="hidden rounded-sm border border-current px-4 py-2 text-xs md:inline-flex">Request a demo</a>
+    <button id="nav-toggle" aria-label="Menu" class="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-sm border border-current"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+  <div id="nav-mobile" class="hidden border-t border-current/20 bg-background text-foreground md:hidden">
+    <div class="mx-auto max-w-[1400px] px-6 py-4 flex flex-col gap-1 text-sm">
+      <a href="#platform" class="py-2">Platform</a>
+      <a href="#coverage" class="py-2">Coverage</a>
+      <a href="#solutions" class="py-2">Solutions</a>
+      <a href="commercial-banking-rm.html" class="py-2">For your team ↗</a>
+      <a href="#governance" class="py-2">Governance</a>
+      <a href="#advisors" class="py-2">Advisors</a>
+      <a href="#contact" class="mt-2 inline-flex rounded-sm border border-current px-4 py-2 text-xs w-fit">Request a demo</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section id="top" class="relative isolate overflow-hidden text-white">
+  <img src="https://id-preview--3a3c2193-ea3d-443b-bd3f-3ece099afa34.lovable.app/__l5e/assets-v1/942f099b-dfbb-44cf-ad86-dfb8f36a6a31/hero-ny.jpg" alt="Lower Manhattan financial district at golden hour" class="absolute inset-0 -z-10 h-full w-full object-cover" />
+  <div class="absolute inset-0 -z-10" style="background:linear-gradient(135deg,rgba(0,0,0,.85),rgba(0,0,0,.55),rgba(0,0,0,.2));"></div>
+  <div class="absolute inset-0 -z-10 grid-lines opacity-40"></div>
+
+  <div class="relative mx-auto max-w-[1400px] px-6 pb-24 pt-40 md:pb-40 md:pt-48">
+    <p class="mb-6 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-3 py-1 text-[11px] uppercase tracking-[0.22em] text-white/85 backdrop-blur">
+      <span class="h-1.5 w-1.5 rounded-full bg-white"></span> The Agentic Banking OS
+    </p>
+    <h1 class="max-w-[16ch] font-serif text-[52px] leading-[0.95] tracking-tight sm:text-[80px] md:text-[104px] fade-up">
+      Madison helps<br /><em class="italic text-white/90">run your bank.</em>
+    </h1>
+    <p class="mt-8 max-w-xl text-lg text-white/85">
+      Governed AI agents across every banking function.<br />
+      One platform. Your data, your perimeter, your control.
+    </p>
+    <div class="mt-10 flex flex-wrap items-center gap-3">
+      <a href="#contact" class="inline-flex items-center gap-2 rounded-sm bg-white px-5 py-3 text-sm font-medium text-foreground hover:opacity-90">Request a demo →</a>
+      <a href="#platform" class="inline-flex items-center gap-2 rounded-sm border border-white/30 px-5 py-3 text-sm font-medium text-white hover:bg-white/10">Explore the platform</a>
+      <a href="commercial-banking-rm.html" class="ml-1 inline-flex items-center gap-1 text-sm text-white/85 underline-offset-4 hover:text-white hover:underline">Or jump to your team →</a>
+    </div>
+    <div class="mt-14 grid max-w-4xl grid-cols-2 gap-x-6 gap-y-3 sm:grid-cols-4">
+      <div class="flex items-start gap-2 text-[13px] text-white/85"><span class="mt-1 h-3 w-3 rounded-full border border-white/60"></span>Governed by design</div>
+      <div class="flex items-start gap-2 text-[13px] text-white/85"><span class="mt-1 h-3 w-3 rounded-full border border-white/60"></span>Runs in your perimeter</div>
+      <div class="flex items-start gap-2 text-[13px] text-white/85"><span class="mt-1 h-3 w-3 rounded-full border border-white/60"></span>Human in the loop</div>
+      <div class="flex items-start gap-2 text-[13px] text-white/85"><span class="mt-1 h-3 w-3 rounded-full border border-white/60"></span>Exportable audit trail</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MARQUEE ===================== -->
+<section class="border-y border-border bg-secondary/60">
+  <div class="mx-auto max-w-[1400px] px-6 py-8">
+    <div class="mb-5 flex flex-wrap items-baseline justify-between gap-2">
+      <p class="tag">In pilot and production</p>
+      <p class="text-[11px] text-muted-foreground/80">Illustrative wordmarks — customer names published only with signed approval.</p>
+    </div>
+    <div class="relative overflow-hidden marquee-mask">
+      <div class="flex w-max animate-marquee items-center gap-14 whitespace-nowrap" id="marquee-track"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== COVERAGE ===================== -->
+<section id="coverage" class="scroll-mt-24 border-b border-border">
+  <div class="mx-auto max-w-[1400px] px-6 py-24 md:py-32">
+    <div class="mb-10 flex flex-wrap items-end justify-between gap-6">
+      <div>
+        <p class="tag">Front-to-back coverage</p>
+        <h2 class="mt-4 max-w-3xl font-serif text-4xl leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">One platform, from the front office to the back.</h2>
+        <p class="mt-6 max-w-2xl text-lg text-muted-foreground">Madison deploys agents across the full operating stack of a bank. Not a single point solution, but coverage end to end.</p>
+      </div>
+      <div class="flex items-center gap-2">
+        <button id="office-prev" aria-label="Previous" class="grid h-10 w-10 place-items-center rounded-full border border-border transition hover:bg-foreground hover:text-background">‹</button>
+        <button id="office-next" aria-label="Next" class="grid h-10 w-10 place-items-center rounded-full border border-border transition hover:bg-foreground hover:text-background">›</button>
+      </div>
+    </div>
+
+    <div class="grid items-stretch gap-10 md:grid-cols-12">
+      <div class="relative overflow-hidden md:col-span-7">
+        <div id="office-stage" class="relative aspect-[4/3] h-full w-full overflow-hidden bg-secondary"></div>
+      </div>
+      <div class="md:col-span-5">
+        <div id="office-list" class="flex h-full flex-col divide-y divide-border border border-border"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== AUTONOMY ===================== -->
+<section class="border-b border-border bg-secondary">
+  <div class="mx-auto grid max-w-[1400px] gap-12 px-6 py-24 md:grid-cols-12 md:py-28">
+    <p class="text-sm text-muted-foreground md:col-span-4">
+      Our agents work at the right level of autonomy for each function — they
+      <em class="font-serif italic text-foreground">assist</em>,
+      <em class="font-serif italic text-foreground">recommend</em>, or
+      <em class="font-serif italic text-foreground">automate</em>. You set the level; Madison keeps a human in the loop wherever it matters.
+    </p>
+    <div class="grid gap-6 md:col-span-8 md:grid-cols-3">
+      <div class="border border-border bg-background p-6"><div class="flex items-baseline gap-3"><span class="grid h-11 w-11 place-items-center rounded-sm bg-foreground font-serif text-lg text-background">A</span><h3 class="font-serif text-2xl">Assist</h3></div><p class="mt-4 text-sm text-muted-foreground">A copilot to your experts.</p></div>
+      <div class="border border-border bg-background p-6"><div class="flex items-baseline gap-3"><span class="grid h-11 w-11 place-items-center rounded-sm bg-foreground font-serif text-lg text-background">R</span><h3 class="font-serif text-2xl">Recommend</h3></div><p class="mt-4 text-sm text-muted-foreground">Prepares and drafts; your team decides.</p></div>
+      <div class="border border-border bg-background p-6"><div class="flex items-baseline gap-3"><span class="grid h-11 w-11 place-items-center rounded-sm bg-foreground font-serif text-lg text-background">Au</span><h3 class="font-serif text-2xl">Automate</h3></div><p class="mt-4 text-sm text-muted-foreground">Runs end to end, humans on exceptions.</p></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================== SOLUTIONS ===================== -->
+<section id="solutions" class="scroll-mt-24 border-b border-border bg-secondary/60">
+  <div class="mx-auto max-w-[1400px] px-6 py-24 md:py-32">
+    <div class="mb-12 grid gap-6 md:grid-cols-12">
+      <p class="tag md:col-span-3">Solutions</p>
+      <div class="md:col-span-9">
+        <h2 class="max-w-3xl font-serif text-4xl leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">Ten shipping teams. One governed platform.</h2>
+        <p class="mt-6 max-w-2xl text-lg text-muted-foreground">A dedicated view of how Madison runs inside each function — the metrics, integrations, and deployment notes you would ask on day one.</p>
+      </div>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-6">
+      <a href="#" class="group flex flex-col gap-4 border border-border bg-background p-6 transition hover:-translate-y-0.5 md:col-span-4">
+        <div class="flex items-start justify-between gap-4"><h3 class="font-serif text-2xl leading-tight">Commercial Banking — RM</h3><span class="rounded-full bg-foreground/10 px-2 py-0.5 text-[10px] uppercase tracking-widest">Live</span></div>
+        <p class="text-sm text-muted-foreground">Meeting prep, portfolio watch, and outbound briefs for every relationship manager on the desk.</p>
+        <ul class="mt-6 divide-y divide-border border border-border bg-background text-sm">
+          <li class="flex items-center justify-between px-4 py-2.5"><span>Meeting-brief agent</span><span class="inline-flex items-center gap-2 text-xs"><span class="h-1.5 w-1.5 rounded-full bg-foreground"></span>Done</span></li>
+          <li class="flex items-center justify-between px-4 py-2.5"><span>Portfolio-watch agent</span><span class="inline-flex items-center gap-2 text-xs"><span class="pulse-dot h-1.5 w-1.5 rounded-full bg-foreground/60"></span>Running</span></li>
+          <li class="flex items-center justify-between px-4 py-2.5"><span>Outbound-scan agent</span><span class="inline-flex items-center gap-2 text-xs text-muted-foreground"><span class="h-1.5 w-1.5 rounded-full bg-muted-foreground/50"></span>Queued</span></li>
+        </ul>
+      </a>
+
+      <div class="flex flex-col gap-4 border border-border bg-background p-6 md:col-span-2">
+        <div class="flex items-start justify-between gap-4"><h3 class="font-serif text-2xl leading-tight">Underwriting</h3><span class="rounded-full border border-border px-2 py-0.5 text-[10px] uppercase tracking-widest text-muted-foreground">Coming soon</span></div>
+        <p class="text-sm text-muted-foreground">Credit decisioning end to end — analyst-grade memos, model scores, and a human at the gate.</p>
+        <div class="mt-6 border border-border bg-background p-4 text-sm">
+          <div class="flex items-center justify-between"><span class="font-mono text-xs text-muted-foreground">App #U-4021</span><span class="text-xs">✓ Approved</span></div>
+          <p class="mt-1 text-xs text-muted-foreground">Small business · 24-month term</p>
+          <div class="mt-3 flex items-baseline justify-between">
+            <div><p class="text-[11px] uppercase tracking-widest text-muted-foreground">DSCR</p><p class="font-serif text-2xl">1.42×</p></div>
+            <div><p class="text-[11px] uppercase tracking-widest text-muted-foreground">Model conf.</p><p class="font-serif text-2xl">92%</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-4 border border-border bg-background p-6 md:col-span-2">
+        <div class="flex items-start justify-between gap-4"><h3 class="font-serif text-2xl leading-tight">Reconciliations</h3><span class="rounded-full border border-border px-2 py-0.5 text-[10px] uppercase tracking-widest text-muted-foreground">Coming soon</span></div>
+        <div class="mt-2 flex items-baseline gap-3"><span class="font-serif text-5xl">94%</span><span class="text-sm text-muted-foreground">Matched today</span></div>
+        <div class="mt-3 h-2 w-full overflow-hidden rounded-full bg-border"><div class="h-full rounded-full bg-foreground" style="width:94%"></div></div>
+        <p class="mt-2 text-xs text-muted-foreground">1,204 of 1,207 lines</p>
+      </div>
+
+      <a href="#" class="group flex flex-col gap-4 border border-border bg-background p-6 md:col-span-2">
+        <div class="flex items-start justify-between gap-4"><h3 class="font-serif text-2xl leading-tight">Dispute Resolution</h3><span class="rounded-full bg-foreground/10 px-2 py-0.5 text-[10px] uppercase tracking-widest">Live</span></div>
+        <ul class="mt-2 divide-y divide-border border border-border bg-background text-sm">
+          <li class="flex items-center justify-between px-4 py-2.5"><span>#DR-4824</span><span class="inline-flex items-center gap-2 text-xs"><span class="h-1.5 w-1.5 rounded-full bg-foreground"></span>Resolved</span></li>
+          <li class="flex items-center justify-between px-4 py-2.5"><span>#DR-4825</span><span class="inline-flex items-center gap-2 text-xs"><span class="pulse-dot h-1.5 w-1.5 rounded-full bg-foreground/60"></span>In review</span></li>
+        </ul>
+        <p class="mt-3 text-xs text-muted-foreground">86% auto-settled · 14% routed to adjuster</p>
+      </a>
+
+      <a href="#" class="group flex flex-col gap-4 border border-border bg-background p-6 md:col-span-2">
+        <div class="flex items-start justify-between gap-4"><h3 class="font-serif text-2xl leading-tight">Risk &amp; Compliance</h3><span class="rounded-full bg-foreground/10 px-2 py-0.5 text-[10px] uppercase tracking-widest">Live</span></div>
+        <div class="mt-2 space-y-2 text-sm">
+          <div class="flex items-start justify-between gap-4 border border-border bg-background px-3 py-2"><span class="text-[11px] uppercase tracking-widest text-muted-foreground">TPRM</span><span class="text-right text-[13px]">Vendor Aspen · refresh in 30d</span></div>
+          <div class="flex items-start justify-between gap-4 border border-border bg-background px-3 py-2"><span class="text-[11px] uppercase tracking-widest text-muted-foreground">MRG</span><span class="text-right text-[13px]">Model M-241 · drift flagged</span></div>
+          <div class="flex items-start justify-between gap-4 border border-border bg-background px-3 py-2"><span class="text-[11px] uppercase tracking-widest text-muted-foreground">Vendor-AI</span><span class="text-right text-[13px]">3 intakes · SOC 2 verified</span></div>
+        </div>
+      </a>
+
+      <a href="#" class="group flex flex-col gap-4 border border-border bg-background p-6 md:col-span-2">
+        <div class="flex items-start justify-between gap-4"><h3 class="font-serif text-2xl leading-tight">Retail — Cross-sell</h3><span class="rounded-full bg-foreground/10 px-2 py-0.5 text-[10px] uppercase tracking-widest">Live</span></div>
+        <div class="mt-2 border border-border bg-background p-4">
+          <p class="text-xs text-muted-foreground">Which card earns the most on travel?</p>
+          <p class="mt-2 font-serif text-lg leading-snug">The Sterling Travel card — 3× on flights, no FX fees.</p>
+        </div>
+      </a>
+
+      <a href="#" class="group flex flex-col gap-4 border border-border bg-background p-6 md:col-span-2">
+        <div class="flex items-start justify-between gap-4"><h3 class="font-serif text-2xl leading-tight">Compliant Marketing</h3><span class="rounded-full bg-foreground/10 px-2 py-0.5 text-[10px] uppercase tracking-widest">Live</span></div>
+        <p class="text-sm text-muted-foreground">One brief in, a compliant, launch-ready campaign out — built on your own data, human-approved every step.</p>
+        <div class="mt-4 flex flex-wrap gap-2 text-xs">
+          <span class="rounded-full border border-border bg-background px-3 py-1">✓ Reg DD &amp; Reg Z checked</span>
+          <span class="rounded-full border border-border bg-background px-3 py-1">✓ Human-approved</span>
+          <span class="rounded-full border border-border bg-background px-3 py-1">✓ Audit trail</span>
+        </div>
+      </a>
+
+      <a href="#" class="group flex flex-col gap-4 border border-border bg-background p-6 md:col-span-2">
+        <div class="flex items-start justify-between gap-4"><h3 class="font-serif text-2xl leading-tight">Deal Intelligence</h3><span class="rounded-full bg-foreground/10 px-2 py-0.5 text-[10px] uppercase tracking-widest">Live</span></div>
+        <ul class="mt-2 divide-y divide-border border border-border bg-background text-sm">
+          <li class="flex items-center justify-between px-4 py-2.5"><span>MedTech · Series C</span><span class="text-xs text-red-700">● 2 flags</span></li>
+          <li class="flex items-center justify-between px-4 py-2.5"><span>Enterprise SaaS · PE roll-up</span><span class="text-xs">● IC ready</span></li>
+        </ul>
+        <p class="mt-3 text-xs text-muted-foreground">14 targets tracked · weekly memo drafted</p>
+      </a>
+
+      <div class="flex flex-col gap-4 border border-border bg-background p-6 md:col-span-2">
+        <div class="flex items-start justify-between gap-4"><h3 class="font-serif text-2xl leading-tight">KYC</h3><span class="rounded-full border border-border px-2 py-0.5 text-[10px] uppercase tracking-widest text-muted-foreground">Coming soon</span></div>
+        <div class="mt-2 grid grid-cols-3 gap-3 text-center">
+          <div class="border border-border bg-background p-3"><p class="font-serif text-2xl">96%</p><p class="text-[10px] uppercase tracking-widest text-muted-foreground">Auto-clear</p></div>
+          <div class="border border-border bg-background p-3"><p class="font-serif text-2xl">412</p><p class="text-[10px] uppercase tracking-widest text-muted-foreground">Cleared</p></div>
+          <div class="border border-border bg-background p-3"><p class="font-serif text-2xl">18</p><p class="text-[10px] uppercase tracking-widest text-muted-foreground">Escalated</p></div>
+        </div>
+      </div>
+
+      <a href="#" class="group flex flex-col gap-4 border border-border bg-background p-6 md:col-span-4">
+        <div class="flex items-start justify-between gap-4"><h3 class="font-serif text-2xl leading-tight">HR</h3><span class="rounded-full bg-foreground/10 px-2 py-0.5 text-[10px] uppercase tracking-widest">Live</span></div>
+        <p class="text-sm text-muted-foreground">The full employee journey, orchestrated end to end.</p>
+        <div class="mt-4 grid grid-cols-3 gap-2 text-xs" id="hr-grid"></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== EXPERIENCE ===================== -->
+<section id="experience" class="relative isolate scroll-mt-24 overflow-hidden border-b border-border text-white" style="background:#1E1610;">
+  <img src="https://id-preview--3a3c2193-ea3d-443b-bd3f-3ece099afa34.lovable.app/__l5e/assets-v1/942f099b-dfbb-44cf-ad86-dfb8f36a6a31/hero-ny.jpg" alt="" class="absolute inset-0 -z-10 h-full w-full object-cover opacity-25" />
+  <div class="absolute inset-0 -z-10" style="background:linear-gradient(to bottom, rgba(30,22,16,.95), rgba(30,22,16,.85), rgba(30,22,16,.95));"></div>
+
+  <div class="mx-auto max-w-[1400px] px-6 py-24 md:py-32">
+    <div class="mb-12 grid gap-6 md:grid-cols-12">
+      <p class="text-[11px] uppercase tracking-[0.24em] opacity-60 md:col-span-3">Experience Madison</p>
+      <div class="md:col-span-9">
+        <h2 class="max-w-3xl font-serif text-4xl leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">See Madison at work.</h2>
+        <p class="mt-6 max-w-2xl text-lg opacity-75">Watch a governed agent take a real banking task from intake to a completed, audit-ready result.</p>
+      </div>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-12">
+      <div class="md:col-span-7">
+        <div class="relative aspect-[16/10] overflow-hidden border border-white/15 bg-white/5">
+          <img src="https://id-preview--3a3c2193-ea3d-443b-bd3f-3ece099afa34.lovable.app/__l5e/assets-v1/bb3591ba-d458-49ba-88de-e831d343d9d7/back-office.jpg" alt="" class="h-full w-full object-cover opacity-60" />
+          <div class="absolute inset-0 grid place-items-center">
+            <button class="grid h-20 w-20 place-items-center rounded-full bg-white text-foreground transition hover:scale-105" aria-label="Play demo">▶</button>
+          </div>
+          <div class="absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-[11px] backdrop-blur">
+            <span class="h-1.5 w-1.5 rounded-full bg-white"></span> demo video · 2:14
+          </div>
+        </div>
+      </div>
+
+      <div class="md:col-span-5">
+        <div class="flex h-full flex-col gap-4 border border-white/15 bg-white/5 p-6 backdrop-blur">
+          <div class="flex items-center justify-between text-[11px] uppercase tracking-widest opacity-60"><span>Madison — Dispute Resolution Agent</span><span>Step 3 / 5</span></div>
+          <div class="flex items-center justify-between border-y border-white/15 py-3">
+            <span class="text-sm">Case #DR-88214 · Card dispute</span>
+            <span class="inline-flex items-center gap-1 rounded-full bg-white/10 px-2 py-0.5 text-[10px]"><span class="pulse-dot h-1.5 w-1.5 rounded-full" style="background:#34d399"></span> running</span>
+          </div>
+          <ul class="space-y-2 text-sm">
+            <li>✓ Reviewed transaction history and merchant records.</li>
+            <li>✓ Matched dispute reason to Reg E provisional credit rule.</li>
+            <li>○ Drafted resolution letter — awaiting approval.</li>
+          </ul>
+          <div class="mt-1 flex gap-2">
+            <button class="rounded-sm bg-white px-3 py-2 text-xs font-medium text-foreground">Approve &amp; send</button>
+            <button class="rounded-sm border border-white/25 px-3 py-2 text-xs">Edit draft</button>
+          </div>
+          <div class="mt-2 border-t border-white/15 pt-4">
+            <p class="mb-2 text-[11px] uppercase tracking-widest opacity-60">Audit trail</p>
+            <ol class="space-y-1 text-[12px] opacity-85">
+              <li>· Read case #DR-88214</li>
+              <li>· Queried merchant network</li>
+              <li>· Applied Reg E policy v4.2</li>
+              <li>· Drafted resolution letter</li>
+              <li>· Awaiting human approval</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-12 grid gap-6 md:grid-cols-3">
+      <div class="flex items-start gap-4 border-t border-white/15 pt-6"><span class="font-mono text-xs opacity-60">01</span><p class="font-serif text-xl leading-snug">A dispute resolved end to end.</p></div>
+      <div class="flex items-start gap-4 border-t border-white/15 pt-6"><span class="font-mono text-xs opacity-60">02</span><p class="font-serif text-xl leading-snug">Every step cited and logged.</p></div>
+      <div class="flex items-start gap-4 border-t border-white/15 pt-6"><span class="font-mono text-xs opacity-60">03</span><p class="font-serif text-xl leading-snug">A human approval gate in action.</p></div>
+    </div>
+
+    <div class="mt-12">
+      <a href="#contact" class="inline-flex items-center gap-2 rounded-sm bg-white px-5 py-3 text-sm font-medium text-foreground hover:opacity-90">Request a live demo →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== GOVERNANCE ===================== -->
+<section id="governance" class="scroll-mt-24 border-b border-border">
+  <div class="mx-auto grid max-w-[1400px] gap-14 px-6 py-24 md:grid-cols-12 md:py-32">
+    <div class="md:col-span-5">
+      <p class="tag">Governance &amp; sovereignty</p>
+      <h2 class="mt-6 font-serif text-4xl leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">Built for the way banks are regulated.</h2>
+      <p class="mt-6 max-w-lg text-lg text-muted-foreground">Trust isn't a feature we added. It's the foundation. Every Madison agent runs with role-based access control, identity integration, and a native, exportable audit trail of what it read, what it did, and why. Nothing leaves your perimeter.</p>
+      <div class="mt-8 aspect-[4/3] w-full overflow-hidden border border-border">
+        <img src="https://id-preview--3a3c2193-ea3d-443b-bd3f-3ece099afa34.lovable.app/__l5e/assets-v1/22509f6d-0850-4622-b385-5e7e23f65cc4/governance.jpg" alt="Governance vault" class="h-full w-full object-cover" />
+      </div>
+    </div>
+
+    <div class="md:col-span-7">
+      <p class="tag">Security &amp; compliance</p>
+      <div class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3" id="cert-grid"></div>
+
+      <div class="mt-10 grid gap-6 md:grid-cols-2">
+        <div class="border border-border p-6">
+          <div class="text-2xl">🌐</div>
+          <h3 class="mt-4 font-serif text-2xl">Deploy on your terms</h3>
+          <p class="mt-3 text-sm text-muted-foreground">Cloud, on-premises, or fully air-gapped — VPC, on-prem, and isolated environments so your data and inference stay inside your boundary.</p>
+        </div>
+        <div class="border border-border p-6">
+          <div class="text-2xl">🛡</div>
+          <h3 class="mt-4 font-serif text-2xl">Production-grade from day one</h3>
+          <p class="mt-3 text-sm text-muted-foreground">Git-driven deployment, staged promotion, automated Responsible-AI and hallucination checks, one-click compliance logs.</p>
+        </div>
+      </div>
+
+      <div class="mt-6 flex flex-wrap gap-4 text-xs text-muted-foreground">
+        <span>🔒 RBAC &amp; SSO</span>
+        <span>✓ Exportable audit trail</span>
+        <span>⛨ Zero data egress</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PLATFORM ===================== -->
+<section id="platform" class="scroll-mt-24 border-b border-border bg-secondary/60">
+  <div class="mx-auto max-w-[1400px] px-6 py-24 md:py-32">
+    <div class="mb-12 grid gap-6 md:grid-cols-12">
+      <p class="tag md:col-span-3">The platform beneath Madison</p>
+      <div class="md:col-span-9">
+        <h2 class="max-w-3xl font-serif text-4xl leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">Madison runs on Lyzr. Extend it, deploy it, unify it.</h2>
+        <p class="mt-6 max-w-2xl text-lg text-muted-foreground">Madison is a complete banking solution today, and an open platform you can build on.</p>
+        <p class="mt-3 text-xs uppercase tracking-[0.24em] text-muted-foreground">Built on Lyzr</p>
+      </div>
+    </div>
+    <div id="pillars" class="grid gap-px overflow-hidden border border-border bg-border md:grid-cols-3"></div>
+  </div>
+</section>
+
+
+<!-- ===================== ADVISORS ===================== -->
+<section id="advisors" class="scroll-mt-24 border-b border-border">
+  <div class="mx-auto max-w-[1400px] px-6 py-24 md:py-32">
+    <div class="mb-12 grid gap-6 md:grid-cols-12">
+      <p class="tag md:col-span-3">Shaped by industry leaders</p>
+      <div class="md:col-span-9">
+        <h2 class="max-w-3xl font-serif text-4xl leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">Guided by senior banking, risk & regulation leaders.</h2>
+        <p class="mt-6 max-w-2xl text-lg text-muted-foreground">Ex-bank executives who help shape how Madison is built and governed.</p>
+      </div>
+    </div>
+
+    <div id="advisors-viewport" class="relative overflow-hidden">
+      <div id="advisors-track" class="flex transition-transform duration-700 ease-out"></div>
+    </div>
+
+    <div class="mt-8 flex flex-wrap items-center justify-between gap-6">
+      <div id="advisors-thumbs" class="flex flex-wrap gap-2"></div>
+      <div class="flex items-center gap-2">
+        <button id="advisors-prev" aria-label="Previous" class="grid h-10 w-10 place-items-center rounded-full border border-border transition hover:bg-foreground hover:text-background">‹</button>
+        <button id="advisors-next" aria-label="Next" class="grid h-10 w-10 place-items-center rounded-full border border-border transition hover:bg-foreground hover:text-background">›</button>
+      </div>
+    </div>
+    <div class="mt-4 h-[2px] w-full bg-border overflow-hidden"><div id="advisors-progress" class="h-full bg-foreground" style="width:0%"></div></div>
+  </div>
+</section>
+
+<!-- ===================== CTA ===================== -->
+
+<section id="contact" class="border-b border-border bg-secondary">
+  <div class="mx-auto max-w-[1400px] px-6 py-24 md:py-32 text-center">
+    <p class="tag justify-center">Get started</p>
+    <h2 class="mx-auto mt-6 max-w-3xl font-serif text-4xl leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">Get to production<br />without cutting corners.</h2>
+    <p class="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">Every agent ships through the same governed pipeline — automated testing, compliance gates, staged promotion. Move fast, keep the controls a bank cannot compromise.</p>
+    <div class="mt-10 flex flex-wrap justify-center gap-3">
+      <a href="#contact" class="rounded-sm bg-foreground px-5 py-3 text-sm font-medium text-background">Request a demo →</a>
+      <a href="#platform" class="rounded-sm border border-border px-5 py-3 text-sm font-medium">Explore the platform</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="bg-background">
+  <div class="mx-auto max-w-[1400px] px-6 py-14 text-sm text-muted-foreground">
+    <div class="flex flex-wrap items-center justify-between gap-6">
+      <p class="font-serif text-2xl text-foreground">Madison</p>
+      <p>© 2026 Madison. Built for banks.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== SCRIPTS ===================== -->
+<script>
+  // Data
+  const firms = ["MERIDIAN NATIONAL","ASHFORD CAPITAL","CONTINENTAL TRUST","HARBORVIEW CREDIT UNION","VANTAGE BANCORP","NORTHWIND FINANCIAL","KESTREL SAVINGS","ATLAS MUTUAL"];
+  const offices = [
+    { n:"01", title:"Front Office", tag:"Client-facing revenue & relationships.", items:["Onboarding","RM & advisor copilot","Lending support","Engagement"], image:"https://id-preview--3a3c2193-ea3d-443b-bd3f-3ece099afa34.lovable.app/__l5e/assets-v1/50ac8218-ba9d-4b18-845e-a62283c840d4/front-office.jpg" },
+    { n:"02", title:"Middle Office", tag:"Risk, compliance & control.", items:["KYC/CDD","AML triage","Credit review","Covenant & liquidity monitoring"], image:"https://id-preview--3a3c2193-ea3d-443b-bd3f-3ece099afa34.lovable.app/__l5e/assets-v1/22509f6d-0850-4622-b385-5e7e23f65cc4/governance.jpg" },
+    { n:"03", title:"Back Office", tag:"Processing, settlement & servicing.", items:["Reconciliation","Disputes & chargebacks","Payment exceptions","Loan servicing"], image:"https://id-preview--3a3c2193-ea3d-443b-bd3f-3ece099afa34.lovable.app/__l5e/assets-v1/bb3591ba-d458-49ba-88de-e831d343d9d7/back-office.jpg" },
+    { n:"04", title:"Corporate", tag:"Running the institution.", items:["Regulatory reporting","Forecasting","Vendor / TPRM review","Contract analysis"], image:"https://id-preview--3a3c2193-ea3d-443b-bd3f-3ece099afa34.lovable.app/__l5e/assets-v1/1817a320-d762-465f-b3b6-ffd53cda6a04/section-governance.jpg" },
+  ];
+  const teams = [
+    { n:"01", title:"Commercial Banking", body:"Relationship management for the commercial book.", status:"Live" },
+    { n:"02", title:"Retail Banking", body:"Cross-sell to existing consumers and members.", status:"Live" },
+    { n:"03", title:"Deal Intelligence", body:"Target scanning across M&A, CVC, PE, and VC.", status:"Live" },
+    { n:"04", title:"Compliant Marketing", body:"One brief in, a compliant, launch-ready campaign out.", status:"Live" },
+    { n:"05", title:"Underwriting", body:"Credit decisioning end to end, human in the loop.", status:"Coming soon" },
+    { n:"06", title:"KYC", body:"Identity, sanctions, PEP, and UBO — one governed pass.", status:"Coming soon" },
+    { n:"07", title:"Risk & Compliance", body:"TPRM, Vendor-AI, and Model-Risk Governance.", status:"Live" },
+    { n:"08", title:"Reconciliations", body:"Match, break, and resolve — every rail, every day.", status:"Coming soon" },
+    { n:"09", title:"Dispute Resolution", body:"Servicing disputes investigated, drafted, and closed.", status:"Live" },
+    { n:"10", title:"HR", body:"The full employee journey, orchestrated.", status:"Live" },
+  ];
+  const certs = ["SOC 2 Type II","GDPR Compliant","ISO 27001","DPDP Act (India)","GLBA","DORA (EU)"];
+  const pillars = [
+    { n:"01", title:"Build your own", body:"With Architect and Studio, your teams create custom agents and workflows in plain language.", tags:["Architect","Studio"] },
+    { n:"02", title:"Deploy your way", body:"With Sovereign and Optimus, run Madison in cloud, on-prem, or fully air-gapped.", tags:["Sovereign","Optimus"] },
+    { n:"03", title:"Unify what you have", body:"With the Control Plane, bring existing agents and AI workflows into one governed layer.", tags:["Control Plane"] },
+  ];
+  const advisors = [
+    { name:"Marcus Halloran", role:"Former Group COO · Major Systemic Bank", bio:"Twenty-five years scaling treasury and risk operations across three continents.", prev:"Meridian National" },
+    { name:"Priya Anand", role:"Former Head of Model Risk · Global Asset Manager", bio:"Built model-risk governance for a top-10 asset manager. PhD in applied probability.", prev:"Ashford Capital" },
+    { name:"Daniel Sato", role:"Former Chief Risk Officer · Investment Bank", bio:"Two decades in market and credit risk. Led a global bank's Basel III/IV rollout.", prev:"Continental Trust" },
+    { name:"Elena Petrova", role:"Former Chief Compliance Officer · National Credit Union", bio:"Directed BSA/AML and sanctions programs through two supervisory examinations.", prev:"Harborview Credit Union" },
+    { name:"Robert Chen", role:"Former Bank Examiner · Federal Banking Agency", bio:"Two decades shaping supervisory policy and examination standards.", prev:"Federal Banking Agency" },
+    { name:"Sarah Whitfield", role:"Former CFO · Regional Bank Holding Co.", bio:"Guided finance and treasury through multiple M&A integrations and regulatory exams.", prev:"Vantage Bancorp" },
+  ];
+  const tones = ["from-[#2a1d13] to-[#1E1610]","from-[#3a2a1a] to-[#241812]","from-[#1E1610] to-[#332318]","from-[#2a1d13] to-[#161010]","from-[#3a2a1a] to-[#1E1610]","from-[#241812] to-[#0f0a07]"];
+
+  // Marquee
+  const track = document.getElementById('marquee-track');
+  const marqHtml = [...firms, ...firms].map(f => `
+    <span class="inline-flex items-center gap-3 text-foreground/70">
+      <span class="grid h-7 w-7 place-items-center rounded-sm border border-border font-serif text-sm text-foreground/60">${f.charAt(0)}</span>
+      <span class="font-serif text-lg tracking-[0.22em]">${f}</span>
+      <span class="text-foreground/25">•</span>
+    </span>`).join('');
+  track.innerHTML = marqHtml;
+
+  // Office carousel
+  let oi = 0;
+  const stage = document.getElementById('office-stage');
+  const list = document.getElementById('office-list');
+  function renderOffices(){
+    stage.innerHTML = offices.map((o,i)=>`
+      <div class="absolute inset-0 transition-all duration-700 ${i===oi?'opacity-100 scale-100':'opacity-0 scale-[1.03]'}">
+        <img src="${o.image}" alt="${o.title}" class="absolute inset-0 h-full w-full object-cover" />
+        <div class="absolute inset-0" style="background:linear-gradient(to top, rgba(0,0,0,.7), rgba(0,0,0,.1), transparent);"></div>
+        <div class="absolute bottom-6 left-6 right-6 flex items-end justify-between text-white">
+          <div><p class="font-mono text-xs tracking-widest opacity-80">${o.n} / 04</p><h3 class="mt-2 font-serif text-3xl md:text-4xl">${o.title}</h3></div>
+        </div>
+      </div>`).join('');
+    list.innerHTML = offices.map((o,i)=>`
+      <button data-i="${i}" class="office-btn flex-1 px-6 py-6 text-left transition ${i===oi?'bg-foreground text-white':'bg-background hover:bg-secondary'}">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3"><span class="font-mono text-[11px] tracking-widest opacity-70">${o.n}</span><span class="font-serif text-xl md:text-2xl">${o.title}</span></div>
+        </div>
+        <p class="mt-2 text-[15px] leading-relaxed ${i===oi?'text-white/85':'text-muted-foreground'}">${o.tag}</p>
+        ${i===oi?`<ul class="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-[13px] opacity-90">${o.items.map(x=>`<li class="flex items-center gap-1.5"><span class="h-1 w-1 rounded-full bg-current"></span>${x}</li>`).join('')}</ul>`:''}
+      </button>`).join('');
+    list.querySelectorAll('.office-btn').forEach(b=>b.addEventListener('click',()=>{oi=+b.dataset.i;renderOffices();}));
+  }
+  renderOffices();
+  setInterval(()=>{oi=(oi+1)%offices.length;renderOffices();},6000);
+  document.getElementById('office-next').onclick=()=>{oi=(oi+1)%offices.length;renderOffices();};
+  document.getElementById('office-prev').onclick=()=>{oi=(oi-1+offices.length)%offices.length;renderOffices();};
+
+
+  // HR grid
+  const hrCells = ["Hire","Onboard","Learn & develop","Agentic OS","Orchestrating","—","Review","Reward","Exit interview"];
+  document.getElementById('hr-grid').innerHTML = hrCells.map((c,i)=>`<span class="border border-border px-3 py-2 ${i===3?'bg-foreground text-white':'bg-background'}">${c}</span>`).join('');
+
+  // Certs
+  document.getElementById('cert-grid').innerHTML = certs.map(c=>`<div class="flex items-center gap-2 border border-border bg-secondary/60 px-4 py-3 text-sm">✓ ${c}</div>`).join('');
+
+  // Pillars
+  document.getElementById('pillars').innerHTML = pillars.map(p=>`
+    <div class="group flex flex-col justify-between gap-6 bg-background p-8 transition hover:bg-foreground hover:text-white">
+      <div class="flex items-center justify-between">
+        <span class="font-mono text-[11px] tracking-widest text-muted-foreground group-hover:text-white/70">${p.n}</span>
+      </div>
+      <div>
+        <h3 class="font-serif text-2xl">${p.title}</h3>
+        <p class="mt-4 text-sm text-muted-foreground group-hover:text-white/75">${p.body}</p>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        ${p.tags.map(t=>`<span class="rounded-full border border-border px-3 py-1 text-xs group-hover:border-white/30">${t}</span>`).join('')}
+      </div>
+    </div>`).join('');
+
+  // (Advisors rendered as carousel below)
+
+  // Sticky nav — theme change on scroll
+  const nav = document.getElementById('site-nav');
+  const onScroll = () => {
+    if (window.scrollY > 60) {
+      nav.classList.remove('text-white');
+      nav.classList.add('text-foreground','border-border','bg-background/85','backdrop-blur');
+      nav.style.backdropFilter = 'saturate(140%) blur(10px)';
+    } else {
+      nav.classList.add('text-white');
+      nav.classList.remove('text-foreground','border-border','bg-background/85','backdrop-blur');
+      nav.style.backdropFilter = '';
+    }
+  };
+  window.addEventListener('scroll', onScroll, { passive:true }); onScroll();
+
+  // Scroll spy
+  const spyIds = ['platform','coverage','solutions','governance','advisors'];
+  const spyLinks = document.querySelectorAll('[data-spy]');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if (e.isIntersecting){
+        spyLinks.forEach(l=>l.classList.toggle('active', l.dataset.spy===e.target.id));
+      }
+    });
+  },{ rootMargin:'-40% 0px -55% 0px' });
+  spyIds.forEach(id=>{ const el=document.getElementById(id); if(el) io.observe(el); });
+
+  // Mobile menu
+  const navToggle = document.getElementById('nav-toggle');
+  const navMobile = document.getElementById('nav-mobile');
+  navToggle?.addEventListener('click', ()=> navMobile.classList.toggle('hidden'));
+  navMobile?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navMobile.classList.add('hidden')));
+
+  // Advisors — 3-col auto slider with thumbnails (same feel as testimonials)
+  const vtrack = document.getElementById('advisors-track');
+  const vthumbs = document.getElementById('advisors-thumbs');
+  const vprog = document.getElementById('advisors-progress');
+  const viewport = document.getElementById('advisors-viewport');
+  let vi = 0, vRAF = null, vStart = 0;
+  const AUTO_MS = 5000;
+  function perView(){ return window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1; }
+  function maxIndex(){ return Math.max(0, advisors.length - perView()); }
+  function initialsOf(name){ return name.split(' ').map(w=>w[0]).slice(0,2).join(''); }
+  function renderAdvisors(){
+    vtrack.innerHTML = advisors.map((a,i)=>{
+      const initials = initialsOf(a.name);
+      const tone = tones[i%tones.length];
+      return `
+      <article class="shrink-0 basis-full sm:basis-1/2 lg:basis-1/3 p-3">
+        <div class="flex h-full flex-col border border-border bg-background">
+          <div class="relative aspect-[5/4] w-full overflow-hidden bg-gradient-to-br ${tone}">
+            <div class="absolute inset-0 grid-lines opacity-30"></div>
+            <div class="absolute inset-0 grid place-items-center">
+              <span class="font-serif text-[88px] italic text-white/90 transition duration-500 hover:scale-[1.04]">${initials}</span>
+            </div>
+            <div class="absolute inset-x-0 bottom-0 p-5 text-white" style="background:linear-gradient(to top, rgba(0,0,0,.7), rgba(0,0,0,.1), transparent);">
+              <p class="text-[10px] uppercase tracking-[0.22em] opacity-80">Previously</p>
+              <p class="font-serif text-lg">${a.prev}</p>
+            </div>
+          </div>
+          <div class="flex flex-1 flex-col gap-4 p-7">
+            <div class="text-3xl font-serif leading-none text-foreground/30">“</div>
+            <p class="font-serif text-lg leading-snug">${a.bio}</p>
+            <div class="mt-auto flex items-center gap-3 border-t border-border pt-5">
+              <span class="grid h-11 w-11 place-items-center rounded-full bg-gradient-to-br ${tone} font-serif text-white">${initials}</span>
+              <div>
+                <p class="text-sm font-medium">${a.name}</p>
+                <p class="text-xs text-muted-foreground">${a.role}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>`;
+    }).join('');
+    vthumbs.innerHTML = advisors.map((a,i)=>`
+      <button data-vi="${i}" aria-label="${a.name}" class="voice-thumb grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br ${tones[i%tones.length]} text-[11px] font-medium text-white ring-offset-2 transition ${i===vi?'ring-2 ring-foreground':''}"><span>${initialsOf(a.name)}</span></button>`).join('');
+    vthumbs.querySelectorAll('.voice-thumb').forEach(b=>b.addEventListener('click',()=>{ go(+b.dataset.vi); restart(); }));
+    update();
+  }
+  function update(){
+    const pv = perView();
+    vi = Math.min(vi, maxIndex());
+    vtrack.style.transform = `translateX(-${vi * (100/pv)}%)`;
+    vthumbs.querySelectorAll('.voice-thumb').forEach((b,i)=>{ b.classList.toggle('ring-2', i===vi); b.classList.toggle('ring-foreground', i===vi); });
+  }
+  function go(i){ vi = (i + (maxIndex()+1)) % (maxIndex()+1); update(); }
+  function next(){ go(vi >= maxIndex() ? 0 : vi+1); }
+  function prev(){ go(vi <= 0 ? maxIndex() : vi-1); }
+  function tick(ts){
+    if(!vStart) vStart = ts;
+    const pct = Math.min(100, ((ts - vStart)/AUTO_MS)*100);
+    vprog.style.width = pct+'%';
+    if(pct >= 100){ vStart = ts; next(); }
+    vRAF = requestAnimationFrame(tick);
+  }
+  function start(){ vStart = 0; vprog.style.width='0%'; cancelAnimationFrame(vRAF); vRAF = requestAnimationFrame(tick); }
+  function stop(){ cancelAnimationFrame(vRAF); }
+  function restart(){ stop(); start(); }
+  document.getElementById('advisors-next').onclick = ()=>{ next(); restart(); };
+  document.getElementById('advisors-prev').onclick = ()=>{ prev(); restart(); };
+  viewport.addEventListener('mouseenter', stop);
+  viewport.addEventListener('mouseleave', start);
+  window.addEventListener('resize', update);
+  renderAdvisors(); start();
+</script>
+</body>
+</html>
